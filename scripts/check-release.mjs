@@ -53,6 +53,20 @@ const stamp = existsSync('scripts/cv-pdf-built-for.txt') ? readFileSync('scripts
 if (!existsSync('public/Al-Amin-Alif-CV.pdf')) failures.push('public/Al-Amin-Alif-CV.pdf is missing');
 else if (stamp !== address) failures.push(`CV PDF was built for "${stamp || 'unknown'}" but the address is "${address}". Run scripts/build-cv-pdf.sh and commit the result.`);
 
+// 4b. The CV download must work in the BUILT output, not just exist as a file: the page links to it,
+// the PDF is in dist, and the PDF carries live link annotations (portfolio, email and phone).
+const cvPage = existsSync('dist/cv/index.html') ? readFileSync('dist/cv/index.html', 'utf8') : '';
+if (!existsSync('dist/Al-Amin-Alif-CV.pdf')) failures.push('dist/Al-Amin-Alif-CV.pdf is missing from the build');
+if (!/href="[^"]*Al-Amin-Alif-CV\.pdf"/.test(cvPage)) failures.push('dist/cv/index.html has no link to the CV PDF');
+if (/being prepared/i.test(cvPage)) failures.push('dist/cv/index.html still says the PDF is being prepared');
+if (existsSync('public/Al-Amin-Alif-CV.pdf')) {
+  const pdf = readFileSync('public/Al-Amin-Alif-CV.pdf', 'latin1');
+  const uris = [...pdf.matchAll(/\/URI\s*\(([^)]*)\)/g)].map((m) => m[1]);
+  if (!uris.some((x) => x.startsWith('mailto:'))) failures.push('CV PDF has no mailto link annotation');
+  if (!uris.some((x) => x.startsWith('tel:'))) failures.push('CV PDF has no tel link annotation');
+  if (!uris.includes(address)) failures.push(`CV PDF has no link annotation for ${address}`);
+}
+
 // 5. Legacy or private material must not be in the published output.
 for (const bad of ['dist/legacy', 'dist/private']) if (existsSync(bad)) failures.push(`${bad} must not be published`);
 

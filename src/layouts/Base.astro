@@ -82,5 +82,24 @@ const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
         paint();
       })();
     </script>
+    <script is:inline>
+      // Header menu: enhancement only. Escape closes an open menu and returns focus to its button;
+      // choosing a link that stays on the same page (an anchor) closes it too.
+      (function () {
+        var menus = document.querySelectorAll('.menu-mobile');
+        menus.forEach(function (m) {
+          m.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape' || !m.open) return;
+            m.open = false;
+            var s = m.querySelector('summary');
+            if (s) s.focus();
+          });
+          m.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href]');
+            if (a && m.open) m.open = false;
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

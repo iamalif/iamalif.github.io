@@ -1,11 +1,10 @@
 ---
-import fs from 'node:fs';
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { u, absolute } from '../lib/url';
 
 const pdfName = 'Al-Amin-Alif-CV.pdf';
-const hasPdf = fs.existsSync(new URL(`../../public/${pdfName}`, import.meta.url));
+// The PDF is a committed file in public/. `npm run check:release` fails if it is missing from the build or not linked below.
 const updated = 'November 2026';
 
 const experience = [
@@ -84,14 +83,8 @@ const projects = [
         <section class="tile tile--grad">
           <span class="label">PDF</span>
           <h2 style="font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;margin:0.4rem 0">Download the CV</h2>
-          {hasPdf ? (
-            <>
-              <p class="muted">A curated application CV with selectable text. Updated {updated}.</p>
-              <a class="btn btn--primary" style="margin-top:1rem;width:100%" href={u(pdfName)}>Download PDF</a>
-            </>
-          ) : (
-            <p class="muted">The PDF is being prepared. This page is the current CV.</p>
-          )}
+          <p class="muted">A curated application CV with selectable text. Updated {updated}.</p>
+          <a class="btn btn--primary" style="margin-top:1rem;width:100%" href={u(pdfName)}>Download PDF</a>
         </section>
         <section class="tile">
           <span class="label">Print</span>
