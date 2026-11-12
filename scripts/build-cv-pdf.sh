@@ -9,8 +9,13 @@ SITE="${PUBLIC_SITE:-https://iamalif.github.io}"; SITE="${SITE%/}"
 BASE="${PUBLIC_BASE:-/}"; BASE="${BASE%/}/"
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 PORT=4399
+if lsof -nP -iTCP:"$PORT" -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "Port $PORT is already in use (a leftover dev server?). Stop it and run again." >&2
+  exit 1
+fi
 PROFILE="$(mktemp -d)"
-trap 'kill "$SERVER" 2>/dev/null || true; rm -rf "$PROFILE"' EXIT
+# npx starts astro in a separate process, so stop whatever is listening on the port as well as the parent.
+trap 'kill "$SERVER" 2>/dev/null || true; lsof -nP -iTCP:"$PORT" -sTCP:LISTEN -t 2>/dev/null | xargs kill 2>/dev/null || true; rm -rf "$PROFILE"' EXIT
 PUBLIC_SITE="$SITE" PUBLIC_BASE="$BASE" npx astro dev --port "$PORT" >/dev/null 2>&1 &
 SERVER=$!
 for _ in $(seq 1 40); do curl -sf "http://127.0.0.1:$PORT${BASE}cv/" >/dev/null && break; sleep 0.5; done

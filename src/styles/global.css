@@ -243,7 +243,7 @@ main { display: block; padding-bottom: 3rem; }
 .focus-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
 .focus-list li { border: 1px solid var(--line); background: var(--tile2); border-radius: 10px; padding: 0.35rem 0.8rem; font-weight: 600; font-size: 0.9375rem; }
 .portrait { display: flex; align-items: center; gap: 1rem; }
-.portrait__ph { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--a1), var(--a2)); opacity: 0.9; display: grid; place-items: center; color: var(--on-grad); font-weight: 800; flex: none; }
+.portrait__img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: center 30%; border: 2px solid var(--line); flex: none; }
 
 /* Project cards */
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -449,7 +449,8 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-fam
 .about-edu { grid-column: span 5; }
 .about-lang { grid-column: span 3; }
 .about-looking { grid-column: span 4; }
-.portrait-box { aspect-ratio: 1 / 1.05; border-radius: 20px; background: linear-gradient(135deg, var(--a1), var(--a2)); display: grid; place-items: center; color: var(--on-grad); font-size: 4rem; font-weight: 800; opacity: 0.92; }
+.portrait-box { aspect-ratio: 1 / 1.05; border-radius: 20px; overflow: hidden; background: var(--tile2); }
+.portrait-box img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
 .approach { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 1.5rem; margin-top: 0.9rem; }
 .approach li { display: grid; gap: 0.5rem; justify-items: start; }
 .cred-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1rem; }

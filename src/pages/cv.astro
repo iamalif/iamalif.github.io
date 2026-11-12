@@ -50,7 +50,7 @@ const projects = [
         <header>
           <h2 id="cv-name">{site.name}</h2>
           <p class="cv-role">Head of Development &amp; AI · Technical Project Manager</p>
-          <p class="cv-contact">Borlänge, Sweden · {site.email} · {site.phone}</p>
+          <p class="cv-contact">Borlänge, Sweden · <a href={`mailto:${site.email}`}>{site.email}</a> · <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></p>
           <p class="cv-contact"><a href={absolute('')}>{absolute('').replace(/^https?:\/\//, '')}</a> · <a href={site.linkedin}>linkedin.com/in/al-amin-alif</a> · <a href={site.github}>github.com/iamalif</a></p>
         </header>
         <section aria-labelledby="cv-sum"><h3 id="cv-sum">Summary</h3>
@@ -101,8 +101,8 @@ const projects = [
           <span class="label">Contact</span>
           <div class="facts">
             <dl>
-              <div><dt>Email</dt><dd>{site.email}</dd></div>
-              <div><dt>Phone</dt><dd>{site.phone}</dd></div>
+              <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+              <div><dt>Phone</dt><dd><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></dd></div>
               <div><dt>Location</dt><dd>Borlänge, Sweden</dd></div>
             </dl>
           </div>

@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Diagram from '../components/Diagram.astro';
 import Contour from '../components/Contour.astro';
+import portrait from '../assets/portrait.webp';
 import { site, now, career, education, focus } from '../data/site';
 import { u, absolute } from '../lib/url';
 
@@ -70,8 +71,8 @@ const fig = feature?.data.findings?.figure;
       </section>
       <section class="tile profile" aria-label="Profile links">
         <div class="portrait">
-          <div class="portrait__ph" aria-hidden="true">AA</div>
-          <div><strong style="font-size:1.25rem">{site.name}</strong><br /><span class="label">Portrait placeholder</span></div>
+          <Image class="portrait__img" src={portrait} alt="Portrait of Al Amin Alif" width={160} height={160} />
+          <div><strong style="font-size:1.25rem">{site.name}</strong><br /><span class="label">Borlänge, Sweden</span></div>
         </div>
         <div>
           <div class="chip-links">
@@ -79,7 +80,7 @@ const fig = feature?.data.findings?.figure;
             <a class="chip" href={site.github}>GitHub</a>
             <a class="chip" href={site.linkedin}>LinkedIn</a>
           </div>
-          <p class="muted" style="margin-top:0.75rem;overflow-wrap:anywhere">{site.email}</p>
+          <p class="muted" style="margin-top:0.75rem;overflow-wrap:anywhere"><a href={`mailto:${site.email}`}>{site.email}</a></p>
         </div>
       </section>
     </div>

@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import portrait from '../assets/portrait.webp';
 import { site, education } from '../data/site';
 import { u, absolute } from '../lib/url';
 
@@ -42,10 +44,9 @@ const jsonLd = {
 
     <div class="bento" style="margin-top:2rem">
       <section class="tile tile--grad about-portrait" aria-label="Portrait">
-        <div class="portrait-box" aria-hidden="true"><span>AA</span></div>
+        <div class="portrait-box"><Image src={portrait} alt="Portrait of Al Amin Alif" width={720} height={756} widths={[360, 720]} sizes="(max-width: 900px) 16rem, 360px" loading="eager" /></div>
         <p style="margin-top:1rem"><strong style="font-size:1.4rem;letter-spacing:-0.02em">{site.name}</strong></p>
         <p class="meta">Borlänge, Sweden</p>
-        <p class="label" style="margin-top:0.5rem">Portrait placeholder</p>
       </section>
       <section class="tile about-story" aria-labelledby="story-h">
         <span class="label">Career story</span>
