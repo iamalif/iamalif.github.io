@@ -1,0 +1,113 @@
+---
+import fs from 'node:fs';
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { u, absolute } from '../lib/url';
+
+const pdfName = 'Al-Amin-Alif-CV.pdf';
+const hasPdf = fs.existsSync(new URL(`../../public/${pdfName}`, import.meta.url));
+const updated = 'November 2026';
+
+const experience = [
+  { role: 'Head of Development & AI / Technical Project Manager', org: 'Digital Authority Partners, remote', dates: 'Jun 2024 to present', bullets: [
+    'Lead development and AI delivery across engineering, design, content, SEO and product teams, coordinating multiple client engagements from scoping to release.',
+    'Translate business needs into technical specifications, user stories and acceptance criteria; run development sprints and AI-team Scrum.',
+    'Manage delivery of AI agents, sales automation, CRM integrations and data workflows, and of web and digital products including CJP, ONS Biomarker Guides and a client onboarding portal.',
+    'Use Claude, Claude Code, Cowork, Codex, ChatGPT, Gemini and Firecrawl in AI-assisted research, development and review workflows, assessing outputs against requirements.',
+  ] },
+  { role: 'AI Engineering & Automation Lead / Technical Project Manager', org: 'PerformanceX, remote', dates: 'Jul 2025 to present', bullets: [
+    'Lead day-to-day technical delivery of an AI workforce-intelligence platform that turns communication and work-activity data into evidence-backed employee and manager reports.',
+    'Coordinate AI engineering, integrations, reporting and portal development across roadmap planning, sprint execution, quality assurance and release reviews.',
+    'Set review gates for AI output quality and agent behaviour; managed migration of 10 ingestion sources and 15 report flows from n8n to Google Cloud Run.',
+  ] },
+  { role: 'Head of Service Delivery', org: 'Inbouncy LLC, remote', dates: 'Jun 2019 to May 2024', bullets: [
+    'Directed delivery of web development, CRM, SEO, content and digital marketing services for clients and agency partners in North America and Europe.',
+    'Established procedures and quality checks across concurrent engagements; implemented HubSpot pipelines, task automation, dashboards and reporting.',
+  ] },
+  { role: 'Junior Account Manager', org: 'OneLittleWeb Ltd, Dhaka', dates: 'Jul 2021 to Jan 2023', bullets: [
+    'Managed SEO client accounts and coordinated outreach, content and technical SEO delivery.',
+  ] },
+];
+const skills = [
+  { g: 'AI and automation', t: 'AI agents, generative AI, prompt engineering, AI output evaluation, workflow automation, n8n, Zapier, Make' },
+  { g: 'Data and machine learning', t: 'Python, R, SQL, PostgreSQL, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
+  { g: 'Analytics', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, Streamlit' },
+  { g: 'Delivery and leadership', t: 'Technical project management, Agile and Scrum, requirements and acceptance criteria, QA, stakeholder and risk management, mentoring' },
+  { g: 'Delivery environments', t: 'HubSpot, WordPress, Shopify, Zoho, Google Analytics 4, Google Tag Manager, Google Cloud Run, Supabase, Vercel' },
+];
+const projects = [
+  ['Swedish Job-Ad Explorer', 'Independent. JobTech API, PostgreSQL, TF-IDF classifier and Streamlit interface; local application.'],
+  ['Monte Carlo risk analysis', 'Coursework. Hospital-capacity and stock-return simulations in R, including an exact stationary check of the hospital model.'],
+  ['GeoLife trip-purpose classification', 'Coursework. HMMs and a Random Forest, with evaluation limits stated.'],
+  ['PerformanceX, DAP AI Sales Automation, CJP', 'Professional delivery across AI workforce intelligence, sales automation and platform consolidation.'],
+];
+---
+<Base title="CV" description="Curriculum vitae of Al Amin Alif: roles, dates, education and selected projects." path="cv/" current="CV">
+  <div class="wrap">
+    <div class="page-title cv-title"><span class="label">CV</span><h1>CV</h1></div>
+    <div class="cv-layout">
+      <article class="cv-paper" aria-labelledby="cv-name">
+        <header>
+          <h2 id="cv-name">{site.name}</h2>
+          <p class="cv-role">Head of Development &amp; AI · Technical Project Manager</p>
+          <p class="cv-contact">Borlänge, Sweden · {site.email} · {site.phone}</p>
+          <p class="cv-contact"><a href={absolute('')}>{absolute('').replace(/^https?:\/\//, '')}</a> · <a href={site.linkedin}>linkedin.com/in/al-amin-alif</a> · <a href={site.github}>github.com/iamalif</a></p>
+        </header>
+        <section aria-labelledby="cv-sum"><h3 id="cv-sum">Summary</h3>
+          <p>Head of Development &amp; AI and Technical Project Manager with professional experience since 2019 spanning digital services, CRM, technical delivery and AI. Lead AI product and automation delivery at Digital Authority Partners and PerformanceX. Completing a 120-credit Data Science master's programme at Dalarna University (expected January 2028). {site.authorisation}.</p>
+        </section>
+        <section aria-labelledby="cv-exp"><h3 id="cv-exp">Experience</h3>
+          {experience.map((e) => (
+            <div class="cv-item">
+              <div class="cv-item__head"><strong>{e.role}</strong><span>{e.dates}</span></div>
+              <p class="cv-org">{e.org}</p>
+              <ul class="bullets">{e.bullets.map((b) => <li>{b}</li>)}</ul>
+            </div>
+          ))}
+        </section>
+        <section aria-labelledby="cv-edu"><h3 id="cv-edu">Education</h3>
+          <div class="cv-item"><div class="cv-item__head"><strong>Dalarna University</strong><span>Jan 2026 to Jan 2028 (expected)</span></div><p class="cv-org">MSc Data Science, 120-credit programme (in progress)</p></div>
+          <div class="cv-item"><div class="cv-item__head"><strong>BRAC University</strong><span>2014 to 2019</span></div><p class="cv-org">BSc Computer Science and Engineering</p></div>
+        </section>
+        <section aria-labelledby="cv-proj"><h3 id="cv-proj">Selected projects</h3>
+          <ul class="bullets">{projects.map(([a, b]) => <li><strong>{a}.</strong> {b}</li>)}</ul>
+        </section>
+        <section aria-labelledby="cv-skills"><h3 id="cv-skills">Skills</h3>
+          <dl class="cv-skills">{skills.map((s) => <><dt>{s.g}</dt><dd>{s.t}</dd></>)}</dl>
+        </section>
+        <section aria-labelledby="cv-lang"><h3 id="cv-lang">Languages</h3>
+          <p>Bangla (native) · English (IELTS Academic 8.0, July 2025) · Swedish (basic, A1, learning)</p>
+        </section>
+      </article>
+
+      <aside class="cv-side" aria-label="CV actions">
+        <section class="tile tile--grad">
+          <span class="label">PDF</span>
+          <h2 style="font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;margin:0.4rem 0">Download the CV</h2>
+          {hasPdf ? (
+            <>
+              <p class="muted">A curated application CV with selectable text. Updated {updated}.</p>
+              <a class="btn btn--primary" style="margin-top:1rem;width:100%" href={u(pdfName)}>Download PDF</a>
+            </>
+          ) : (
+            <p class="muted">The PDF is being prepared. This page is the current CV.</p>
+          )}
+        </section>
+        <section class="tile">
+          <span class="label">Print</span>
+          <p class="muted" style="margin-top:0.4rem">Print a copy of this CV, or download the PDF.</p>
+        </section>
+        <section class="tile">
+          <span class="label">Contact</span>
+          <div class="facts">
+            <dl>
+              <div><dt>Email</dt><dd>{site.email}</dd></div>
+              <div><dt>Phone</dt><dd>{site.phone}</dd></div>
+              <div><dt>Location</dt><dd>Borlänge, Sweden</dd></div>
+            </dl>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</Base>

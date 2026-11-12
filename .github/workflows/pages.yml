@@ -1,0 +1,51 @@
+# INACTIVE TEMPLATE. This file does nothing while it sits in deploy/.
+# At launch, in the NEW repository, it is copied to .github/workflows/pages.yml (deploy/prepare-launch-copy.sh does this).
+# Settings in GitHub (repository Settings, Secrets and variables, Actions, Variables), all optional:
+#   PUBLIC_SITE       default https://iamalif.github.io
+#   PUBLIC_BASE       default /
+#   PUBLIC_INDEXABLE  default false (site stays noindex until this is set to true at launch)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_SITE: ${{ vars.PUBLIC_SITE || 'https://iamalif.github.io' }}
+      PUBLIC_BASE: ${{ vars.PUBLIC_BASE || '/' }}
+      PUBLIC_INDEXABLE: ${{ vars.PUBLIC_INDEXABLE || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run verify         # content rules, build, link and metadata checks
+      - run: npm run check:release  # strict only when PUBLIC_INDEXABLE is true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

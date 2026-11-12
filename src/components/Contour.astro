@@ -1,0 +1,8 @@
+---
+// Decorative location contours, kept behind text.
+---
+<svg class="contour" viewBox="0 0 420 230" preserveAspectRatio="xMidYMid slice" fill="none" stroke="var(--line)" stroke-width="1.4" aria-hidden="true" focusable="false">
+  {[0, 1, 2, 3, 4, 5, 6, 7].map((k) => <path d={`M${-20 + k * 10} ${250 - k * 8}C${100 + k * 16} ${120 - k * 12} ${250 + k * 10} ${190 - k * 14} 440 ${60 + k * 20}`} />)}
+  <circle cx="352" cy="64" r="12" fill="var(--warm-deco)" stroke="none" opacity=".35" />
+  <circle cx="352" cy="64" r="5.5" fill="var(--warm-deco)" stroke="none" />
+</svg>

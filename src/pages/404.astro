@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url';
+---
+<Base title="Page not found" path="404/">
+  <div class="wrap">
+    <div class="page-title">
+      <span class="label">404</span>
+      <h1>Page not found</h1>
+      <p class="sub">That page does not exist. Try the <a href={u('work/')}>work</a> or <a href={u('projects/')}>projects</a> pages, or go back <a href={u()}>home</a>.</p>
+    </div>
+  </div>
+</Base>

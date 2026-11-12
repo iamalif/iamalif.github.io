@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import IndexList from '../../components/IndexList.astro';
+
+const entries = await getCollection('work', (e) => !e.data.draft);
+---
+<Base title="Work" description="Selected professional work across AI products, platform integrations, web delivery and analytics." path="work/" current="Work">
+  <div class="wrap">
+    <div class="page-title">
+      <span class="label">Work</span>
+      <h1>Delivery work</h1>
+      <p class="sub">Selected professional work across AI products, platform integrations, web delivery and analytics. My contributions span technical leadership, project management and delivery coordination.</p>
+      <p class="muted" style="margin-top:0.75rem">{entries.length} projects. The larger ones have their own pages; the rest link to the live client site.</p>
+    </div>
+    <IndexList entries={entries} kind="work" />
+  </div>
+</Base>

@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { u } from '../lib/url';
+type Entry = CollectionEntry<'work'> | CollectionEntry<'projects'>;
+interface Props { entries: Entry[]; kind: 'work' | 'projects' }
+const { entries, kind } = Astro.props;
+const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
+const groups = [...new Set(sorted.map((e) => e.data.group))];
+const slugify = (s: string) => s.replace(/\W+/g, '-').toLowerCase();
+---
+<nav class="group-jump" aria-label="Jump to a group">
+  <ul class="chip-links">
+    {groups.map((g) => <li><a class="chip" href={`#g-${slugify(g)}`}>{g} <span class="muted">({sorted.filter((e) => e.data.group === g).length})</span></a></li>)}
+  </ul>
+</nav>
+{groups.map((g) => (
+  <section class="tile group" aria-labelledby={`g-${slugify(g)}`}>
+    <h2 id={`g-${slugify(g)}`}>{g}</h2>
+    <ul class="index-list">
+      {sorted.filter((e) => e.data.group === g).map((e) => {
+        const d: any = e.data;
+        return (
+          <li>
+            <div class="index-row">
+              <p class="meta">{d.dates ?? ''}{d.dates && (d.org ?? d.context) ? <br /> : null}{kind === 'work' ? d.org ?? '' : d.context}</p>
+              <div>
+                <h3>{d.hasPage ? <a href={u(`${kind}/${e.id}/`)}>{d.title}</a> : d.title}</h3>
+                <p>{d.summary}</p>
+                {!d.hasPage && d.links?.length > 0 && (
+                  <ul class="chip-links" aria-label={`Repositories for ${d.title}`}>
+                    {d.links.map((l: { label: string; url: string }) => <li><a class="chip" href={l.url}>{l.label} <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (GitHub repository)</span></a></li>)}
+                  </ul>
+                )}
+              </div>
+              <div class="index-side">
+                <span class="chip chip--role">{d.role}</span>
+                {!d.hasPage && d.url && <a class="chip" href={d.url}>{d.urlLabel ?? 'Visit'} <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (opens {d.title})</span></a>}
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+))}

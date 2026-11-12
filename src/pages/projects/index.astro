@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import IndexList from '../../components/IndexList.astro';
+
+const entries = await getCollection('projects', (e) => !e.data.draft);
+---
+<Base title="Projects" description="Independent and academic projects in Python, R, SQL and machine learning, with role, context and limits stated." path="projects/" current="Projects">
+  <div class="wrap">
+    <div class="page-title">
+      <span class="label">Projects</span>
+      <h1>Data and technical projects</h1>
+      <p class="sub">Independent and academic work in Python, R, SQL and machine learning. Each project page states my role, the context and the limits of the results. Smaller exercises are grouped and link to their repositories.</p>
+      <p class="muted" style="margin-top:0.75rem">{entries.length} projects and collections.</p>
+    </div>
+    <IndexList entries={entries} kind="projects" />
+  </div>
+</Base>

@@ -1,0 +1,23 @@
+{
+  "name": "alaminalif-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:content": "node scripts/check-content.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "verify": "npm run check:content && npm run build && npm run check:links",
+    "check:release": "node scripts/check-release.mjs",
+    "cv:pdf": "bash scripts/build-cv-pdf.sh"
+  },
+  "dependencies": {
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0"
+  }
+}

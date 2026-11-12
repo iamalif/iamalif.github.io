@@ -1,0 +1,50 @@
+---
+title: "Swedish Job-Ad Explorer"
+subtitle: "Python, PostgreSQL and NLP"
+summary: "A local application that ingests Swedish job ads from the JobTech API into PostgreSQL, with SQL analysis, a TF-IDF classifier and a Streamlit interface."
+role: "Built independently"
+context: "Independent project"
+dates: "Jun to Aug 2026"
+group: "Featured technical work"
+order: 3
+featured: true
+tags:
+  - "Python"
+  - "PostgreSQL"
+  - "SQL"
+  - "Streamlit"
+diagramKind: "db"
+tools:
+  - "Python"
+  - "PostgreSQL"
+  - "SQL"
+  - "pandas"
+  - "scikit-learn"
+  - "Streamlit"
+data: "Swedish job ads from the JobTech JobSearch API"
+links:
+  - label: "Repository"
+    url: "https://github.com/iamalif/swedish-job-ad-explorer"
+problem: "Job advertisements are published as free text across many employers and regions. This project collects Swedish job ads through the JobTech JobSearch API, stores them in PostgreSQL and explores them with SQL, a simple occupation classifier and an interactive interface."
+method:
+  - title: "Ingest"
+    text: "Paginated API ingestion using the search term data, with deduplication."
+  - title: "Store"
+    text: "A PostgreSQL table holding ad text, employer details, the occupation taxonomy, geography and publication dates."
+  - title: "Analyse"
+    text: "SQL with common table expressions and window functions: occupation fields, employers, regions, monthly comparisons and completeness checks."
+  - title: "Classify"
+    text: "A TF-IDF and logistic-regression classifier predicts occupation field, with a majority-class baseline and a stratified train/test split. Occupation fields with fewer than 10 examples are excluded; features are unigrams and bigrams (up to 5,000) with balanced class weights."
+  - title: "Present"
+    text: "A Streamlit interface with a region selector, charts and a prediction box for pasted ad text."
+limitsTitle: "Scope and limits"
+limits:
+  - "A local application. It is not deployed publicly."
+  - "Connection settings (host, database and role name) are hard-coded for local use, and the saved model's dependency versions were not recorded."
+  - "The collected snapshot depends on the search term and the collection date, so it is not a representative sample of the Swedish labour market, and it does not establish historical hiring growth: older listings disappear and repeated ingestion skips existing IDs."
+  - "The train/test split is random at advertisement level, not temporal or employer-grouped, so similar ads can share language across partitions."
+  - "Employer-name normalisation merges casing differences but is not full entity resolution."
+  - "Model quality has not been validated beyond the baseline comparison, and no accuracy figure is claimed."
+  - "The monthly chart covers all stored regions and is not filtered by the region selector."
+contribution: "An independent project, not a university assignment. I built the ingestion, database schema, SQL analysis, classifier and interface myself."
+---

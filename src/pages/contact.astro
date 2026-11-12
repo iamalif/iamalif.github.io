@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import Contour from '../components/Contour.astro';
+import { site } from '../data/site';
+import { u } from '../lib/url';
+---
+<Base title="Contact" description="Contact Al Amin Alif in Borlänge, Sweden about opportunities in technical delivery, development leadership and AI." path="contact/" current="Contact">
+  <div class="wrap">
+    <div class="page-title">
+      <span class="label">Contact</span>
+      <h1>Contact</h1>
+      <p class="sub">Email me about opportunities or collaborations.</p>
+    </div>
+
+    <div class="bento" style="margin-top:2rem">
+      <section class="tile tile--grad contact-main" aria-labelledby="email-h">
+        <span class="label label--warm">Email</span>
+        <h2 id="email-h" class="email-big"><a href={`mailto:${site.email}`}>{site.email}</a></h2>
+        <div class="actions" style="margin-top:1.25rem">
+          <a class="btn btn--primary" href={`mailto:${site.email}`}>Write an email</a>
+          <button type="button" class="btn btn--ghost" data-copy={site.email} hidden>Copy address</button>
+          <span class="note" role="status" aria-live="polite" data-copy-status></span>
+        </div>
+      </section>
+      <section class="tile contact-phone" aria-labelledby="phone-h">
+        <span class="label">Phone</span>
+        <h2 id="phone-h" class="phone-big"><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></h2>
+      </section>
+    </div>
+
+    <ul class="three-col" style="margin-top:20px">
+      <li class="tile"><span class="label">LinkedIn</span><a class="link-big" href={site.linkedin}>linkedin.com/in/al-amin-alif</a><p class="muted">Profile, experience and recommendations</p></li>
+      <li class="tile"><span class="label">GitHub</span><a class="link-big" href={site.github}>github.com/iamalif</a><p class="muted">Code, coursework and selected technical projects</p></li>
+      <li class="tile"><span class="label">CV</span><a class="link-big" href={u('cv/')}>Read or download the CV</a><p class="muted">HTML page and PDF</p></li>
+    </ul>
+
+    <div class="bento" style="margin-top:20px">
+      <section class="tile contact-loc" aria-labelledby="loc-h">
+        <Contour />
+        <span class="label">Location</span>
+        <h2 id="loc-h">Borlänge, Sweden</h2>
+        <p class="muted">Dalarna. Sweden time (CET/CEST). Experienced in remote work with US-based teams.</p>
+      </section>
+      <section class="tile tile--grad contact-avail" aria-labelledby="avail-h">
+        <p class="pill-line"><span class="dot" aria-hidden="true"></span><span class="label">Availability</span></p>
+        <h2 id="avail-h">Open to opportunities in Sweden.</h2>
+        <p class="muted">Opportunities in technical delivery, development leadership, AI and automation, and suitable hands-on data roles in Sweden. Open to on-site, hybrid or remote work. {site.authorisation}.</p>
+      </section>
+    </div>
+  </div>
+  <script is:inline>
+    // Copy address: enhancement only. Reports failure visibly.
+    (function () {
+      var b = document.querySelector('[data-copy]');
+      var s = document.querySelector('[data-copy-status]');
+      if (!b || !s) return;
+      b.hidden = false;
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-copy');
+        var ok = function () { s.textContent = 'Address copied.'; };
+        var fail = function () { s.textContent = 'Could not copy. Select the address above instead.'; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(ok, fail);
+        else fail();
+      });
+    })();
+  </script>
+</Base>

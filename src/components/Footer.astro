@@ -1,0 +1,15 @@
+---
+import { site, nav } from '../data/site';
+import { u } from '../lib/url';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <p>{site.name}, Borlänge, Sweden. {site.authorisation}.</p>
+    <ul class="footer-links">
+      {nav.map((n) => <li><a href={u(n.path)}>{n.label}</a></li>)}
+      <li><a href={site.linkedin}>LinkedIn</a></li>
+      <li><a href={site.github}>GitHub</a></li>
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+    </ul>
+  </div>
+</footer>

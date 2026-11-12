@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, education } from '../data/site';
+import { u, absolute } from '../lib/url';
+
+const approach = [
+  { tag: 'Requirements', text: 'Clear acceptance criteria and priorities before work starts.' },
+  { tag: 'Review gates', text: 'Named sign-off, with staged evaluation and human review appropriate to the workflow.' },
+  { tag: 'AI-assisted workflows', text: 'Claude, Claude Code, Codex, Cowork, Firecrawl, ChatGPT and Gemini, with outputs assessed against requirements.' },
+  { tag: 'Accountability', text: 'I assess outputs critically and remain accountable for decisions.' },
+];
+const credentials = [
+  { group: 'AI', items: ['Anthropic: AI Fluency: Framework & Foundations; Claude 101; Introduction to Claude Cowork (Mar 2026)'] },
+  { group: 'Data, machine learning and programming', items: [
+    'Kaggle: Python; Intro to Programming (Mar 2026)',
+    'Kaggle: Feature Engineering; Intermediate Machine Learning; Intro to Machine Learning; Data Visualization; Pandas (Apr 2026)',
+    'Kaggle: Advanced SQL; Intro to SQL (May 2026)',
+    'Cisco Networking Academy: Python Essentials 1; Python Essentials 2 (Apr 2026)',
+    'IBM and Cognitive Class: Python, data analysis, data visualisation and machine learning courses and badges (May 2026)',
+    'HackerRank: Python Basic skills certification (Mar 2026)',
+    'Simplilearn: Power BI for Beginners (Apr 2026)',
+  ] },
+  { group: 'Delivery and platforms', items: ['Historical HubSpot Academy training in CRM, marketing, sales and platform implementation.'] },
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.title,
+  email: site.email,
+  url: absolute(''),
+  address: { '@type': 'PostalAddress', addressLocality: 'Borlänge', addressCountry: 'SE' },
+  worksFor: { '@type': 'Organization', name: 'Digital Authority Partners' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'BRAC University' },
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'Dalarna University' },
+  sameAs: [site.linkedin, site.github],
+};
+---
+<Base title="About" description="Career story, working approach, education and training of Al Amin Alif, Head of Development & AI in Borlänge, Sweden." path="about/" current="About" jsonLd={jsonLd}>
+  <div class="wrap">
+    <div class="page-title"><span class="label">About</span><h1>About</h1></div>
+
+    <div class="bento" style="margin-top:2rem">
+      <section class="tile tile--grad about-portrait" aria-label="Portrait">
+        <div class="portrait-box" aria-hidden="true"><span>AA</span></div>
+        <p style="margin-top:1rem"><strong style="font-size:1.4rem;letter-spacing:-0.02em">{site.name}</strong></p>
+        <p class="meta">Borlänge, Sweden</p>
+        <p class="label" style="margin-top:0.5rem">Portrait placeholder</p>
+      </section>
+      <section class="tile about-story" aria-labelledby="story-h">
+        <span class="label">Career story</span>
+        <h2 id="story-h" class="visually-hidden">Career story</h2>
+        <p style="font-size:1.2rem;line-height:1.55">I lead development and AI delivery at Digital Authority Partners and technical delivery at PerformanceX, translating business needs into requirements, coordinated engineering work and reviewed releases. My professional experience since 2019 spans digital services, CRM, technical delivery and, more recently, AI.</p>
+        <p class="muted" style="margin-top:1rem">Alongside that, I am completing a 120-credit Data Science master's programme at Dalarna University in Sweden, where I build and evaluate projects in Python, R, SQL and machine learning. The two sides support each other: delivery experience shapes how I scope and review technical work, and hands-on analysis keeps me close to what the tools can and cannot do.</p>
+      </section>
+      <section class="tile about-approach" aria-labelledby="approach-h">
+        <span class="label">How I work</span>
+        <h2 id="approach-h" class="visually-hidden">How I work</h2>
+        <ul class="approach">
+          {approach.map((a) => <li><span class="chip chip--role">{a.tag}</span><p>{a.text}</p></li>)}
+        </ul>
+      </section>
+    </div>
+
+    <div class="bento" style="margin-top:20px">
+      <section class="tile about-edu" aria-labelledby="edu-h">
+        <span class="label">Education</span>
+        <h2 id="edu-h" class="visually-hidden">Education</h2>
+        <ul class="rows">
+          <li><b>Dalarna University</b><span class="when">Jan 2026 to Jan 2028 (expected)</span><span class="sub">MSc Data Science, 120-credit programme, in progress</span></li>
+        </ul>
+        <p class="note" style="margin-top:0.5rem">The July 2026 transcript records VG (pass with distinction) in four courses totalling 30 credits: Python and R Programming, Data Analysis and Visualisation, Statistical Learning and Business Intelligence. Coursework for Data Collection and Quality and for Risk Analysis is complete, with results pending at the last update.</p>
+        <ul class="rows" style="margin-top:0.75rem">
+          <li><b>BRAC University</b><span class="when">2014 to 2019</span><span class="sub">BSc Computer Science and Engineering</span></li>
+        </ul>
+      </section>
+      <section class="tile about-lang" aria-labelledby="lang-h">
+        <span class="label">Languages</span>
+        <h2 id="lang-h" class="visually-hidden">Languages</h2>
+        <ul class="rows">
+          <li><b>Bangla</b><span class="sub">Native</span></li>
+          <li><b>English</b><span class="sub">IELTS Academic 8.0, July 2025</span></li>
+          <li><b>Swedish</b><span class="sub">Basic (A1), learning</span></li>
+        </ul>
+      </section>
+      <section class="tile tile--grad about-looking" aria-labelledby="look-h">
+        <span class="label label--warm">Looking for</span>
+        <h2 id="look-h" class="visually-hidden">Looking for</h2>
+        <p style="font-size:1.125rem">Opportunities in technical delivery, development leadership, AI and automation, and suitable hands-on data roles in Sweden. Open to on-site, hybrid or remote work.</p>
+        <p class="muted" style="margin-top:0.9rem;font-weight:600">{site.authorisation}.</p>
+      </section>
+    </div>
+
+    <section class="tile" style="margin-top:20px" aria-labelledby="cred-h">
+      <span class="label">Credentials and training</span>
+      <h2 id="cred-h" class="visually-hidden">Credentials and training</h2>
+      <div class="cred-grid">
+        {credentials.map((c) => (
+          <div>
+            <span class="chip chip--role">{c.group}</span>
+            <ul class="bullets">{c.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="tile tile--grad about-cta" aria-labelledby="cta-h">
+      <div><h2 id="cta-h">Want the full chronology?</h2><p class="muted">The CV lists roles, dates and selected projects.</p></div>
+      <a class="btn btn--primary" href={u('cv/')}>Read the CV</a>
+    </section>
+  </div>
+</Base>

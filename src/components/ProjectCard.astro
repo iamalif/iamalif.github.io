@@ -1,0 +1,28 @@
+---
+import Diagram from './Diagram.astro';
+interface Props {
+  title: string; summary: string; role: string; context: string; dates?: string; href: string;
+  kind: 'pipeline' | 'loop' | 'merge' | 'db' | 'dist' | 'bars'; tags: string[]; scope?: { value: string; label: string; note?: string }[];
+  draft?: boolean;
+}
+const { title, summary, role, context, dates, href, kind, tags, scope = [], draft = false } = Astro.props;
+const meta = [context, dates].filter(Boolean).join(' · ');
+---
+<article class:list={['tile', 'card', draft && 'card--draft']}>
+  <div class="card__panel"><Diagram kind={kind} /></div>
+  <div class="card__body">
+    <p><span class="chip chip--role">{role}</span></p>
+    <p class="meta">{meta}</p>
+    <h3><a href={href}>{title}</a></h3>
+    <p>{summary}</p>
+    {scope.length > 0 && (
+      <p class="scope">
+        {scope.map((s, i) => <>{i > 0 && ' · '}<b>{s.value}</b> {s.label}</>)}
+        {scope[0]?.note && <> ({scope[0].note.toLowerCase()})</>}
+      </p>
+    )}
+    <ul class="tags" aria-label="Tools and topics">{tags.slice(0, 4).map((t) => <li>{t}</li>)}</ul>
+    {draft && <p><span class="badge-draft">Page in preparation</span></p>}
+    <span class="card__more" aria-hidden="true">Read the project page</span>
+  </div>
+</article>

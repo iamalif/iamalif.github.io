@@ -1,0 +1,124 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { u } from '../lib/url';
+interface Props { entry: CollectionEntry<'work'>; next?: CollectionEntry<'work'> }
+const { entry, next } = Astro.props;
+const d = entry.data;
+const sections = [
+  d.problem && { id: 'context', label: 'Context' },
+  d.diagram && { id: 'diagram', label: 'Overview' },
+  d.contribution && { id: 'contribution', label: 'My contribution' },
+  d.decisions.length > 0 && { id: 'decisions', label: 'Decisions' },
+  d.scope.length > 0 && { id: 'scope', label: 'Scope' },
+  d.evidence && { id: 'evidence', label: 'Evidence' },
+].filter(Boolean) as { id: string; label: string }[];
+---
+<div class="wrap">
+  <div class="page-title project-head">
+    <p class="crumbs"><a href={u('work/')}>Work</a> / {d.title}</p>
+    <h1>{d.title}</h1>
+    {d.subtitle && <p class="sub">{d.subtitle}</p>}
+    <div class="chips">
+      <span class="chip chip--solid">{d.role}</span>
+      <span class="chip">{d.context}</span>
+      {d.dates && <span class="chip">{d.dates}</span>}
+      {d.status && <span class="chip">{d.status}</span>}
+    </div>
+  </div>
+
+  <div class="project-grid">
+    <aside class="tile tile--grad facts project-facts" aria-label="Project facts">
+      <span class="label">At a glance</span>
+      <dl>
+        <div><dt>Role</dt><dd>{d.roleTitle ?? d.role}</dd></div>
+        <div><dt>Context</dt><dd>{d.org ? `${d.context}, ${d.org}` : d.context}</dd></div>
+        {d.dates && <div><dt>Dates</dt><dd>{d.dates}</dd></div>}
+        {d.environment.length > 0 && (
+          <div><dt>Delivery environment</dt><dd><ul class="tags" style="margin-top:0.4rem">{d.environment.map((t) => <li>{t}</li>)}</ul></dd></div>
+        )}
+      </dl>
+      {d.evidence && <a class="btn btn--primary btn--small" href={d.evidence.url}>{d.evidence.label}</a>}
+    </aside>
+
+    {sections.length > 1 && (
+      <nav class="project-toc" aria-label="On this page">
+        <span class="label">On this page</span>
+        <ol>{sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}</ol>
+      </nav>
+    )}
+
+    <div class="project-main">
+      {d.draft && <p class="draft-note"><strong>Page in preparation.</strong> The full write-up for this project is still being drafted from the source material. The facts shown here are the approved summary.</p>}
+
+      {d.problem && (
+        <section class="tile section-tile" id="context" aria-labelledby="context-h">
+          <span class="label">Problem and context</span>
+          <h2 id="context-h" class="visually-hidden">Problem and context</h2>
+          <p style="font-size:1.125rem">{d.problem}</p>
+        </section>
+      )}
+
+      {d.diagram && (
+        <section class="tile tile--grad section-tile" id="diagram" aria-labelledby="diagram-h">
+          <span class="label">Overview</span>
+          <h2 id="diagram-h">{d.diagram.title}</h2>
+          <ol class="flow">
+            {d.diagram.nodes.map((n) => <li><b>{n.title}</b><span>{n.text}</span></li>)}
+          </ol>
+          {d.diagram.caption && <p class="note">{d.diagram.caption}</p>}
+        </section>
+      )}
+
+      {d.contribution && (
+        <section class="tile section-tile" id="contribution" aria-labelledby="contribution-h">
+          <span class="label">My contribution and team</span>
+          <h2 id="contribution-h">{d.contributionTitle ?? d.role}</h2>
+          <p style="font-size:1.125rem">{d.contribution}</p>
+          {d.team && <p class="muted">Working with: {d.team}</p>}
+          {d.sharedCredit && <p class="muted">{d.sharedCredit}</p>}
+        </section>
+      )}
+
+      {d.decisions.length > 0 && (
+        <section class="tile section-tile" id="decisions" aria-labelledby="decisions-h">
+          <span class="label">What I did</span>
+          <h2 id="decisions-h">Decisions that mattered</h2>
+          <ol class="decisions">
+            {d.decisions.map((x) => <li><span class="chip">{x.tag}</span><span style="font-size:1.0625rem;font-weight:600">{x.text}</span></li>)}
+          </ol>
+        </section>
+      )}
+
+      {d.scope.length > 0 && (
+        <section class="section-tile" id="scope" aria-labelledby="scope-h">
+          <h2 id="scope-h" class="visually-hidden">Scope</h2>
+          <div class="stats">
+            {d.scope.map((s, i) => (
+              <div class:list={['tile', 'stat', i === 0 && 'tile--grad']}>
+                <b class={i === 0 ? 'grad-text' : ''}>{s.value}</b>
+                <span>{s.label}</span>
+                {s.note && <small>{s.note}</small>}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {d.evidence && (
+        <section class="tile section-tile evidence" id="evidence" aria-labelledby="evidence-h">
+          <span class="label">Evidence you can inspect</span>
+          <h2 id="evidence-h" class="visually-hidden">Evidence</h2>
+          <p><a class="big" href={d.evidence.url}>{d.evidence.label}</a></p>
+          <p class="muted">{d.evidence.note}</p>
+        </section>
+      )}
+
+      {next && (
+        <a class="tile next-link" href={u(`work/${next.id}/`)}>
+          <span><span class="label">Next project</span><br /><strong>{next.data.title}</strong></span>
+          <span aria-hidden="true" style="font-size:1.8rem;color:var(--link)">&rarr;</span>
+        </a>
+      )}
+    </div>
+  </div>
+</div>

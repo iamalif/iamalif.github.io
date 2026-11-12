@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('projects', (e) => e.data.hasPage && !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({ params: { slug: entry.id }, props: { entry, next: all[(i + 1) % all.length] } }));
+}
+const { entry, next } = Astro.props;
+---
+<Base title={entry.data.title} description={entry.data.summary} path={`projects/${entry.id}/`} current="Projects">
+  <ProjectDetail entry={entry} next={next.id === entry.id ? undefined : next} />
+</Base>

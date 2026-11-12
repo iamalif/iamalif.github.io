@@ -1,0 +1,156 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { u } from '../lib/url';
+interface Props { entry: CollectionEntry<'projects'>; next?: CollectionEntry<'projects'> }
+const { entry, next } = Astro.props;
+const d = entry.data;
+const f = d.findings;
+const fmt = (n: number, p = 3) => n.toFixed(p);
+const sections = [
+  d.problem && { id: 'problem', label: 'Problem' },
+  d.method.length > 0 && { id: 'method', label: 'Method' },
+  f && { id: 'findings', label: 'Findings' },
+  d.results && { id: 'results', label: 'Results' },
+  d.limits.length > 0 && { id: 'limits', label: 'Limits' },
+  d.aiNote && { id: 'ai', label: 'AI assistance' },
+  d.contribution && { id: 'role', label: 'My role' },
+].filter(Boolean) as { id: string; label: string }[];
+---
+<div class="wrap">
+  <div class="page-title project-head">
+    <p class="crumbs"><a href={u('projects/')}>Projects</a> / {d.title}</p>
+    <h1>{d.title}</h1>
+    {d.subtitle && <p class="sub">{d.subtitle}</p>}
+    <div class="chips">
+      <span class="chip chip--solid">{d.role}</span>
+      <span class="chip">{d.context}</span>
+      {d.dates && <span class="chip">{d.dates}</span>}
+    </div>
+  </div>
+
+  <div class="project-grid">
+    <aside class="tile tile--grad facts project-facts" aria-label="Project facts">
+      <span class="label">At a glance</span>
+      <dl>
+        <div><dt>Role</dt><dd>{d.role}</dd></div>
+        <div><dt>Context</dt><dd>{d.context}</dd></div>
+        {d.dates && <div><dt>Dates</dt><dd>{d.dates}</dd></div>}
+        {d.data && <div><dt>Data</dt><dd>{d.data}</dd></div>}
+        {d.tools.length > 0 && <div><dt>Tools</dt><dd><ul class="tags" style="margin-top:0.4rem">{d.tools.map((t) => <li>{t}</li>)}</ul></dd></div>}
+      </dl>
+      {d.links.map((l, i) => <a class:list={['btn', 'btn--small', i === 0 ? 'btn--primary' : 'btn--ghost']} href={l.url}>{l.label}</a>)}
+    </aside>
+
+    {sections.length > 1 && (
+      <nav class="project-toc" aria-label="On this page">
+        <span class="label">On this page</span>
+        <ol>{sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}</ol>
+      </nav>
+    )}
+
+    <div class="project-main">
+      {d.draft && <p class="draft-note"><strong>Page in preparation.</strong> The full write-up for this project is still being drafted from the source material. The facts shown here are the approved summary.</p>}
+
+      {d.problem && (
+        <section class="tile section-tile" id="problem" aria-labelledby="problem-h">
+          <span class="label">Problem and context</span>
+          <h2 id="problem-h" class="visually-hidden">Problem and context</h2>
+          <p style="font-size:1.125rem">{d.problem}</p>
+        </section>
+      )}
+
+      {d.method.length > 0 && (
+        <section class="tile section-tile" id="method" aria-labelledby="method-h">
+          <span class="label">Method</span>
+          <h2 id="method-h">How it was built</h2>
+          <ol class="steps">{d.method.map((m) => <li><b>{m.title}</b><span>{m.text}</span></li>)}</ol>
+        </section>
+      )}
+
+      {f && (
+        <section class="tile tile--grad section-tile" id="findings" aria-labelledby="findings-h">
+          <span class="label">Findings</span>
+          <h2 id="findings-h">What the results show</h2>
+          <div class="eval"><p>{f.evaluationContext}</p></div>
+          <p class="muted" style="margin-bottom:0.75rem">{f.intro}</p>
+          <div class="table-wrap">
+            <table>
+              <caption>{f.tableCaption}</caption>
+              <thead>
+                <tr><th scope="col">Model</th><th scope="col" class="num">Mean macro-F1</th><th scope="col" class="num">Std. dev.</th><th scope="col"><span class="visually-hidden">Mean as a bar</span></th></tr>
+              </thead>
+              <tbody>
+                {f.rows.map((r) => (
+                  <tr>
+                    <th scope="row" style="text-transform:none;letter-spacing:0;font:700 1rem var(--font-sans);color:var(--ink)">{r.label}</th>
+                    <td class="num">{fmt(r.mean)}</td>
+                    <td class="num">{fmt(r.sd, 4)}</td>
+                    <td aria-hidden="true"><div class="bar"><i style={`width:${(r.mean * 100).toFixed(1)}%`}></i></div></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {f.figure && (
+            <figure style="margin-top:1.5rem">
+              <div class="plate" style="max-width:34rem"><Image src={f.figure.src} alt={f.figure.alt} widths={[480, 800, 1050]} sizes="(max-width: 700px) 90vw, 540px" loading="lazy" /></div>
+              <figcaption class="plate-caption">{f.figure.caption}</figcaption>
+            </figure>
+          )}
+        </section>
+      )}
+
+      {d.results && (
+        <section class="tile tile--grad section-tile" id="results" aria-labelledby="results-h">
+          <span class="label">Results</span>
+          <h2 id="results-h">What was found</h2>
+          {d.results.context && <div class="eval"><p>{d.results.context}</p></div>}
+          <p class="muted" style="margin-bottom:1rem">{d.results.intro}</p>
+          <ul class="stats">
+            {d.results.items.map((r) => (
+              <li class="tile stat"><b class="grad-text" style="font-size:clamp(2.2rem,5vw,3.4rem)">{r.value}</b><span>{r.label}</span>{r.note && <small>{r.note}</small>}</li>
+            ))}
+          </ul>
+          {d.results.figure && (
+            <figure style="margin-top:1.5rem">
+              <div class="plate" style="max-width:34rem"><Image src={d.results.figure.src} alt={d.results.figure.alt} widths={[480, 800, 1100]} sizes="(max-width: 700px) 90vw, 540px" loading="lazy" /></div>
+              <figcaption class="plate-caption">{d.results.figure.caption}</figcaption>
+            </figure>
+          )}
+        </section>
+      )}
+
+      {d.limits.length > 0 && (
+        <section class="tile tile--warn section-tile" id="limits" aria-labelledby="limits-h">
+          <span class="label label--warm">Evaluation limits</span>
+          <h2 id="limits-h">{d.limitsTitle}</h2>
+          <ol class="limits">{d.limits.map((l) => <li><span>{l}</span></li>)}</ol>
+        </section>
+      )}
+
+      {d.aiNote && (
+        <section class="tile section-tile" id="ai" aria-labelledby="ai-h">
+          <span class="label">Methods</span>
+          <h2 id="ai-h">AI assistance</h2>
+          <p style="font-size:1.0625rem">{d.aiNote}</p>
+        </section>
+      )}
+
+      {d.contribution && (
+        <section class="tile section-tile" id="role" aria-labelledby="role-h">
+          <span class="label">My role and contribution</span>
+          <h2 id="role-h">{d.role}</h2>
+          <p style="font-size:1.125rem">{d.contribution}</p>
+        </section>
+      )}
+
+      {next && (
+        <a class="tile next-link" href={u(`projects/${next.id}/`)}>
+          <span><span class="label">Next project</span><br /><strong>{next.data.title}</strong></span>
+          <span aria-hidden="true" style="font-size:1.8rem;color:var(--link)">&rarr;</span>
+        </a>
+      )}
+    </div>
+  </div>
+</div>

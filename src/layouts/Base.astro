@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { u, absolute } from '../lib/url';
+
+interface Props { title: string; description?: string; path?: string; current?: string; jsonLd?: Record<string, unknown> }
+const { title, description = site.description, path = '', current, jsonLd } = Astro.props;
+const ogImage = absolute('og.png');
+const fullTitle = title === site.name ? `${site.name} | ${site.title}, Borlänge, Sweden` : `${title} | ${site.name}`;
+const canonical = absolute(path);
+// Local and preview builds are not indexable. Set PUBLIC_INDEXABLE=true only at launch.
+const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href={u('favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={`${site.name}, ${site.title}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline>
+      // Apply a saved theme before first paint. System is the default (no attribute).
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header current={current} />
+    <main id="main"><slot /></main>
+    <Footer />
+    <script is:inline>
+      // Theme control: enhancement only. Hidden in markup, shown when this script runs.
+      (function () {
+        var root = document.documentElement;
+        var groups = document.querySelectorAll('.theme');
+        function current() {
+          var t = root.getAttribute('data-theme');
+          return t === 'light' || t === 'dark' ? t : 'system';
+        }
+        function paint() {
+          var c = current();
+          groups.forEach(function (g) {
+            g.querySelectorAll('button').forEach(function (b) {
+              b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-set') === c));
+            });
+          });
+        }
+        groups.forEach(function (g) {
+          g.hidden = false;
+          g.addEventListener('click', function (e) {
+            var b = e.target.closest && e.target.closest('button[data-theme-set]');
+            if (!b) return;
+            var v = b.getAttribute('data-theme-set');
+            if (v === 'system') root.removeAttribute('data-theme');
+            else root.setAttribute('data-theme', v);
+            try {
+              if (v === 'system') localStorage.removeItem('theme');
+              else localStorage.setItem('theme', v);
+            } catch (err) {}
+            paint();
+          });
+        });
+        paint();
+      })();
+    </script>
+  </body>
+</html>
