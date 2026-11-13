@@ -54,11 +54,10 @@ export const menus: Record<string, { areas: { label: string; text: string; path:
   },
 };
 
-// Homepage "Skills and capabilities". `kind` separates delivery environments from personally implemented work.
-export const capabilities: { title: string; kind: 'Delivery' | 'Hands-on'; text: string; links: { label: string; path: string }[] }[] = [
+// Homepage "Skills and capabilities". Personal contribution is explained on each project page, not here.
+export const capabilities: { title: string; text: string; links: { label: string; path: string }[] }[] = [
   {
     title: 'Technical delivery and leadership',
-    kind: 'Delivery',
     text: 'Requirements, prioritisation, sprint coordination, QA, stakeholder management and release readiness.',
     links: [
       { label: 'PerformanceX', path: 'work/performancex/' },
@@ -68,8 +67,7 @@ export const capabilities: { title: string; kind: 'Delivery' | 'Hands-on'; text:
   },
   {
     title: 'AI and automation',
-    kind: 'Delivery',
-    text: 'Agent-assisted workflows, automation delivery and AI-output evaluation in professional programmes. Python is used hands-on in the projects below.',
+    text: 'Agent-assisted workflows, workflow automation, prompt engineering and AI-output evaluation, supported by practical experience with AI-assisted development tools.',
     links: [
       { label: 'PerformanceX', path: 'work/performancex/' },
       { label: 'Sales Automation', path: 'work/ai-sales-automation/' },
@@ -78,7 +76,6 @@ export const capabilities: { title: string; kind: 'Delivery' | 'Hands-on'; text:
   },
   {
     title: 'Data and machine learning',
-    kind: 'Hands-on',
     text: 'Python, R, SQL, data quality, modelling and simulation, from independent and academic projects.',
     links: [
       { label: 'Job-Ad Explorer', path: 'projects/job-ad-explorer/' },
@@ -89,8 +86,7 @@ export const capabilities: { title: string; kind: 'Delivery' | 'Hands-on'; text:
   },
   {
     title: 'Platforms and integrations',
-    kind: 'Delivery',
-    text: 'CRM, web platforms, APIs and analytics across client delivery.',
+    text: 'CRM implementation, workflow configuration and technical delivery across web platforms, APIs and analytics.',
     links: [
       { label: 'CJP', path: 'work/cjp/' },
       { label: 'Client Access Portal', path: 'work/client-access-portal/' },
@@ -118,13 +114,13 @@ export const education = [
   { org: 'BRAC University', role: 'BSc Computer Science and Engineering', dates: '2014 to 2019' },
 ];
 
-// Skill groups shared by the CV and the About page. `kind` separates delivery environments from hands-on work.
-export const skillGroups: { g: string; t: string; kind: 'Delivery' | 'Hands-on' }[] = [
-  { g: 'AI and automation', kind: 'Delivery', t: 'AI agents, generative AI, prompt engineering, AI output evaluation, workflow automation, n8n, Zapier, Make' },
-  { g: 'Data and machine learning', kind: 'Hands-on', t: 'Python, R, SQL, PostgreSQL, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
-  { g: 'Analytics', kind: 'Hands-on', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, Streamlit' },
-  { g: 'Delivery and leadership', kind: 'Delivery', t: 'Technical project management, Agile and Scrum, requirements and acceptance criteria, QA, stakeholder and risk management, mentoring' },
-  { g: 'Delivery environments', kind: 'Delivery', t: 'HubSpot, WordPress, Shopify, Zoho, Google Analytics 4, Google Tag Manager, Google Cloud Run, Supabase, Vercel' },
+// Skill groups shared by the CV and the About page.
+export const skillGroups: { g: string; t: string }[] = [
+  { g: 'AI and automation', t: 'AI agents, generative AI, prompt engineering, AI output evaluation, workflow automation, n8n, Zapier, Make' },
+  { g: 'Data and machine learning', t: 'Python, R, SQL, PostgreSQL, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
+  { g: 'Analytics', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, Streamlit' },
+  { g: 'Delivery and leadership', t: 'Technical project management, Agile and Scrum, requirements and acceptance criteria, QA, stakeholder and risk management, mentoring' },
+  { g: 'Delivery environments', t: 'HubSpot, WordPress, Shopify, Zoho, Google Analytics 4, Google Tag Manager, Google Cloud Run, Supabase, Vercel' },
 ];
 
 export const focus = ['AI agents', 'Automation', 'Python', 'SQL', 'Data analysis', 'Machine learning', 'Technical delivery'];
