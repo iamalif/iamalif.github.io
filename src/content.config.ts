@@ -38,6 +38,11 @@ export const collections = {
       scope: z.array(scope).default([]),
       problem: z.string().optional(),
       contribution: z.string().optional(),
+      // Optional split of dense contribution text: a separate "what the programme delivered" paragraph,
+      // and scannable points (a short title and one or two sentences each), using existing approved copy only.
+      programme: z.string().optional(),
+      pointsTitle: z.string().optional(),
+      points: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
       team: z.string().optional(),
       diagram: z
         .object({
@@ -63,7 +68,14 @@ export const collections = {
         links: z.array(link).default([]),
         scope: z.array(scope).default([]),
         problem: z.string().optional(),
-        method: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
+        // Short plain-language summary shown before the detailed method ("What I built").
+        built: z.string().optional(),
+        // Heading varies by project type (default "How it was built"). A step may link to its repository folder.
+        methodTitle: z.string().default('How it was built'),
+        method: z.array(z.object({ title: z.string(), text: z.string(), url: z.string().url().optional() })).default([]),
+        // Documented usage example, always labelled as example data where it applies.
+        example: z.object({ title: z.string(), note: z.string().optional(), steps: z.array(z.string()) }).optional(),
+        related: z.array(z.object({ label: z.string(), path: z.string() })).default([]),
         findings: z
           .object({
             intro: z.string(),
@@ -77,7 +89,7 @@ export const collections = {
           .object({
             intro: z.string(),
             context: z.string().optional(),
-            items: z.array(z.object({ label: z.string(), value: z.string(), note: z.string().optional() })),
+            items: z.array(z.object({ label: z.string(), value: z.string(), note: z.string().optional() })).default([]),
             figure: z.object({ src: image(), alt: z.string(), caption: z.string() }).optional(),
           })
           .optional(),

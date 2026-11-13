@@ -43,10 +43,7 @@ method:
 results:
   intro: "The study reports growth in environmental disclosure volume without a corresponding improvement in the substantive language measures used."
   context: "These are observations about dictionary-based measures of reporting language. They do not establish corporate environmental performance, greenwashing or a causal effect of GRI adoption."
-  items:
-    - label: "English-language CSR reports analysed"
-      value: "1,347"
-      note: "2002 to 2016"
+  items: []
 limitsTitle: "Interpretation limits"
 limits:
   - "Keyword classes are proxies for disclosure language, not direct measures of corporate performance."

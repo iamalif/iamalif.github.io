@@ -15,6 +15,14 @@ data: GeoLife trajectories, 182 users, 28,608 trips
 links:
   - label: Repository
     url: https://github.com/iamalif/geolife-trip-purpose-classification
+  - label: Report (PDF)
+    url: https://github.com/iamalif/geolife-trip-purpose-classification/blob/main/report.pdf
+  - label: Presentation
+    url: https://github.com/iamalif/geolife-trip-purpose-classification/blob/main/presentation.pptx
+  - label: Saved results (CSV)
+    url: https://github.com/iamalif/geolife-trip-purpose-classification/blob/main/results_summary.csv
+  - label: Pipeline code
+    url: https://github.com/iamalif/geolife-trip-purpose-classification/blob/main/pipeline.py
 scope:
   - value: "182"
     label: users

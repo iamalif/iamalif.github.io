@@ -73,7 +73,22 @@ const sections = [
         <section class="tile section-tile" id="contribution" aria-labelledby="contribution-h">
           <span class="label">My contribution and team</span>
           <h2 id="contribution-h">{d.contributionTitle ?? d.role}</h2>
+          {d.programme && <h3 class="sub-h">My contribution</h3>}
           <p style="font-size:1.125rem">{d.contribution}</p>
+          {d.programme && (
+            <>
+              <h3 class="sub-h">What the programme delivered</h3>
+              <p style="font-size:1.0625rem">{d.programme}</p>
+            </>
+          )}
+          {d.points.length > 0 && (
+            <>
+              {d.pointsTitle && <h3 class="sub-h">{d.pointsTitle}</h3>}
+              <ul class="points" aria-label={d.pointsTitle ?? 'Key points'}>
+                {d.points.map((p) => <li><b>{p.title}</b><span>{p.text}</span></li>)}
+              </ul>
+            </>
+          )}
           {d.team && <p class="muted">Working with: {d.team}</p>}
           {d.sharedCredit && <p class="muted">{d.sharedCredit}</p>}
         </section>

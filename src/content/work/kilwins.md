@@ -19,7 +19,15 @@ environment:
   - "Shopify"
 problem: "Kilwins needed an online shopping experience that also supported location discovery and store-specific information, serving both the central brand and its franchise network."
 contributionTitle: "Delivery lead"
-contribution: "I led technical delivery coordination across design, content, engineering and QA on product presentation, theme updates, franchise information and location-search workflows, coordinating requirements, publishing dependencies and quality checks. My involvement began at Inbouncy through its partnership with DAP and continued at DAP."
+contribution: "I led technical delivery coordination across design, content, engineering and QA. My involvement began at Inbouncy through its partnership with DAP and continued at DAP."
+pointsTitle: "What the work covered"
+points:
+  - title: "Shopify experience"
+    text: "Product presentation and theme updates."
+  - title: "Store discovery"
+    text: "Franchise information and location-search workflows."
+  - title: "Delivery coordination"
+    text: "Requirements, publishing dependencies and quality checks across design, content, engineering and QA."
 team: "Designers, content specialists, engineers and QA."
 evidence:
   label: "kilwins.com"

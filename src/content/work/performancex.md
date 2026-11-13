@@ -21,7 +21,7 @@ scope:
   - value: "15"
     label: report flows moved off n8n
     note: Migration scope
-problem: Companies hold performance signals across chat, email, meetings and work-tracking tools, but few turn them into consistent, explainable reviews. PerformanceX reads those sources and produces weekly employee and manager reports in which every insight is anchored to a quoted source.
+problem: Companies hold performance signals across chat, email, meetings and work-tracking tools, but few turn them into consistent, explainable reviews. PerformanceX reads those sources and produces weekly employee and manager reports that connect findings to source evidence.
 contribution: I led priorities, sprint planning, review gates and release coordination, working with the engineers and AI specialists responsible for implementation. My day-to-day scope covered roadmap planning, sprint execution, quality assurance and release reviews across AI engineering, integrations, reporting and portal development.
 team: Product owner, engineers and AI specialists.
 diagram:
@@ -32,7 +32,7 @@ diagram:
     - title: Ingestion
       text: Google Cloud Run services
     - title: Scoring and evidence
-      text: A quoted source for every insight
+      text: Findings linked to source evidence
     - title: Reports and portals
       text: Employee and manager views
   caption: "Overview of the platform's data flow."

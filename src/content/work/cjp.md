@@ -25,7 +25,7 @@ scope:
   - value: "300+"
     label: "pages"
     note: "Consolidation scope"
-problem: "CJP, Greater Boston's Jewish federation, ran its digital presence across eight separate web properties. The programme consolidated them into one HubSpot-based platform serving donors, volunteers and the wider community."
+problem: "Combined Jewish Philanthropies (CJP), Greater Boston's Jewish federation, ran its digital presence across eight separate web properties. The programme consolidated them into one HubSpot-based platform serving donors, volunteers and the wider community."
 contributionTitle: "Technical delivery lead"
 contribution: "I led technical project delivery for the HubSpot-based experience, coordinating design, content, engineering and QA across requirements, migration and launch readiness. My delivery scope included event workflows and a custom Eventbrite integration for publishing events and synchronising registrations."
 team: "Designers, content specialists, engineers and QA."

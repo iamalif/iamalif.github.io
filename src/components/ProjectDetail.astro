@@ -9,7 +9,9 @@ const f = d.findings;
 const fmt = (n: number, p = 3) => n.toFixed(p);
 const sections = [
   d.problem && { id: 'problem', label: 'Problem' },
+  d.built && { id: 'built', label: 'What I built' },
   d.method.length > 0 && { id: 'method', label: 'Method' },
+  d.example && { id: 'example', label: 'Example' },
   f && { id: 'findings', label: 'Findings' },
   d.results && { id: 'results', label: 'Results' },
   d.limits.length > 0 && { id: 'limits', label: 'Limits' },
@@ -60,11 +62,28 @@ const sections = [
         </section>
       )}
 
+      {d.built && (
+        <section class="tile tile--grad section-tile" id="built" aria-labelledby="built-h">
+          <span class="label">At a glance</span>
+          <h2 id="built-h">What I built</h2>
+          <p style="font-size:1.125rem">{d.built}</p>
+        </section>
+      )}
+
       {d.method.length > 0 && (
         <section class="tile section-tile" id="method" aria-labelledby="method-h">
           <span class="label">Method</span>
-          <h2 id="method-h">How it was built</h2>
-          <ol class="steps">{d.method.map((m) => <li><b>{m.title}</b><span>{m.text}</span></li>)}</ol>
+          <h2 id="method-h">{d.methodTitle}</h2>
+          <ol class="steps">{d.method.map((m) => <li><b>{m.url ? <a href={m.url}>{m.title} <span aria-hidden="true">&nearr;</span><span class="visually-hidden"> (repository folder)</span></a> : m.title}</b><span>{m.text}</span></li>)}</ol>
+        </section>
+      )}
+
+      {d.example && (
+        <section class="tile section-tile" id="example" aria-labelledby="example-h">
+          <span class="label">Example</span>
+          <h2 id="example-h">{d.example.title}</h2>
+          {d.example.note && <p class="muted">{d.example.note}</p>}
+          <ol class="steps">{d.example.steps.map((s, i) => <li><b>{i + 1}</b><span>{s}</span></li>)}</ol>
         </section>
       )}
 
@@ -106,12 +125,18 @@ const sections = [
           <span class="label">Results</span>
           <h2 id="results-h">What was found</h2>
           {d.results.context && <div class="eval"><p>{d.results.context}</p></div>}
-          <p class="muted" style="margin-bottom:1rem">{d.results.intro}</p>
-          <ul class="stats">
-            {d.results.items.map((r) => (
-              <li class="tile stat"><b class="grad-text" style="font-size:clamp(2.2rem,5vw,3.4rem)">{r.value}</b><span>{r.label}</span>{r.note && <small>{r.note}</small>}</li>
-            ))}
-          </ul>
+          {d.results.items.length > 0 ? (
+            <p class="muted" style="margin-bottom:1rem">{d.results.intro}</p>
+          ) : (
+            <p style="font-size:1.25rem;line-height:1.5;font-weight:600">{d.results.intro}</p>
+          )}
+          {d.results.items.length > 0 && (
+            <ul class="stats">
+              {d.results.items.map((r) => (
+                <li class="tile stat"><b class="grad-text" style="font-size:clamp(2.2rem,5vw,3.4rem)">{r.value}</b><span>{r.label}</span>{r.note && <small>{r.note}</small>}</li>
+              ))}
+            </ul>
+          )}
           {d.results.figure && (
             <figure style="margin-top:1.5rem">
               <div class="plate" style="max-width:34rem"><Image src={d.results.figure.src} alt={d.results.figure.alt} widths={[480, 800, 1100]} sizes="(max-width: 700px) 90vw, 540px" loading="lazy" /></div>
@@ -142,6 +167,7 @@ const sections = [
           <span class="label">My role and contribution</span>
           <h2 id="role-h">{d.role}</h2>
           <p style="font-size:1.125rem">{d.contribution}</p>
+          {d.related.length > 0 && <p class="muted">Related: {d.related.map((r, i) => <>{i > 0 && ', '}<a href={u(r.path)}>{r.label}</a></>)}.</p>}
         </section>
       )}
 

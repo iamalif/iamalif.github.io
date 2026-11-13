@@ -21,7 +21,15 @@ environment:
   - "Salesforce"
 problem: "Amplify HR needed industry-specific landing pages and a more consistent measurement foundation, so that campaign activity could be connected to lead progression."
 contributionTitle: "Technical delivery"
-contribution: "I managed technical delivery of the lead-generation and measurement programme, coordinating development of the landing pages alongside form tracking, campaign attribution and GA4 remediation. The reporting work combined Google Ads, GA4 and Salesforce data. My role focused on aligning development and analytics work with campaign requirements, managing dependencies, and coordinating implementation and quality reviews."
+contribution: "I managed technical delivery of the lead-generation and measurement programme."
+pointsTitle: "What the programme covered"
+points:
+  - title: "Landing pages"
+    text: "Eleven industry-specific landing pages, developed alongside form tracking."
+  - title: "Reporting integration"
+    text: "Campaign attribution and GA4 remediation. The reporting work combined Google Ads, GA4 and Salesforce data."
+  - title: "Delivery coordination"
+    text: "My role focused on aligning development and analytics work with campaign requirements, managing dependencies, and coordinating implementation and quality reviews."
 team: "Developers, designers and analysts."
 evidence:
   label: "amplifyhr.com"

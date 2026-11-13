@@ -32,12 +32,16 @@ scope:
 problem: "How do collection conditions and processing choices affect what data can support? The coursework covers GPS records, environmental audio, web collection and research design, with attention to provenance and explicit methodological choices."
 method:
   - title: "GPS mobility"
+    url: "https://github.com/iamalif/data-collection-and-quality-msc/tree/main/gps-mobility"
     text: "Parsed logger records, converted coordinates, segmented journeys, calculated movement features and flagged quality issues."
   - title: "Audio quality"
+    url: "https://github.com/iamalif/data-collection-and-quality-msc/tree/main/audio-quality"
     text: "Sampled an UrbanSound8K subset, inspected recording quality, audited labels by listening, created spectrograms and extracted features."
   - title: "Web collection"
+    url: "https://github.com/iamalif/data-collection-and-quality-msc/tree/main/web-collection"
     text: "Collected text, product and weather data with provenance and error handling, plus a separate OCR demonstration."
   - title: "Research methods"
+    url: "https://github.com/iamalif/data-collection-and-quality-msc/tree/main/research-methods"
     text: "Quantitative and qualitative method exercises, including a small two-interview thematic analysis."
 limitsTitle: "Scope and limits"
 limits:
@@ -45,5 +49,8 @@ limits:
   - "The audio listening audit covers a small educational sample. Listener uncertainty is not proof that dataset labels are wrong."
   - "The qualitative exercise is a small course exercise, not a representative study."
 aiNote: "I set the requirements and quality standards, made the methodological decisions, ran the notebooks locally and reviewed the results. AI tools, principally Claude, supported coding, debugging, drafting and review. The audio listening audit was my own."
+related:
+  - label: "The Calibration Gap (research proposal)"
+    path: "projects/calibration-gap/"
 contribution: "Coursework for Data Collection and Data Quality (AMI23K). The Calibration Gap proposal has its own page. The collection does not claim authorship of supplied data or teaching materials."
 ---

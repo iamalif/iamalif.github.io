@@ -28,7 +28,8 @@ scope:
     note: "Programme scope"
 problem: "Sales work depends on research, preparation and timely follow-up. This programme connected lead research, CRM data, meeting preparation and follow-up into AI-enabled workflows, with AI-assisted quality checks and human review at defined stages."
 contributionTitle: "Delivery management"
-contribution: "My role centred on scoping and prioritising work, coordinating engineering delivery and reviews, and aligning automation with sales-team needs. The programme included automated audit reports, pre-call briefs, lead enrichment, HubSpot contact creation, deal follow-up and account-manager opportunity digests. Engineering work consolidated more than 400 n8n nodes across 10 workflows into a Python application, followed by migration to Google Cloud."
+contribution: "My role centred on scoping and prioritising work, coordinating engineering delivery and reviews, and aligning automation with sales-team needs."
+programme: "The programme included automated audit reports, pre-call briefs, lead enrichment, HubSpot contact creation, deal follow-up and account-manager opportunity digests. Engineering work consolidated more than 400 n8n nodes across 10 workflows into a Python application, followed by migration to Google Cloud."
 team: "Engineers, AI specialists and sales stakeholders."
 diagram:
   title: "How the workflows connect"

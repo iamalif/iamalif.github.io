@@ -20,7 +20,15 @@ environment:
   - "MemberClicks"
 problem: "The Magnificent Mile Association needed a digital experience that brought destination content, events and member resources into one HubSpot-based platform, serving both the public and a membership organisation."
 contributionTitle: "Delivery lead"
-contribution: "I led delivery coordination: requirements translation, sprint planning and cross-functional coordination across design, content, SEO, engineering and QA. I oversaw the MemberClicks integration work for member and event workflows, alongside launch-readiness checks. My involvement began at Inbouncy through its partnership with DAP and continued at DAP."
+contribution: "I led delivery coordination: requirements translation, sprint planning and cross-functional coordination across design, content, SEO, engineering and QA, alongside launch-readiness checks. My involvement began at Inbouncy through its partnership with DAP and continued at DAP."
+pointsTitle: "Deliverables"
+points:
+  - title: "Destination content"
+    text: "Destination content and events brought into one HubSpot-based platform."
+  - title: "Member resources"
+    text: "Member resources for a membership organisation, on the same platform."
+  - title: "MemberClicks integration"
+    text: "Integration work for member and event workflows, which I oversaw."
 team: "Designers, content and SEO specialists, engineers and QA."
 evidence:
   label: "themagnificentmile.com"

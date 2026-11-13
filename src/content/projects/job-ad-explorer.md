@@ -25,6 +25,7 @@ data: "Swedish job ads from the JobTech JobSearch API"
 links:
   - label: "Repository"
     url: "https://github.com/iamalif/swedish-job-ad-explorer"
+built: "A local application with five parts: ingestion from the JobTech JobSearch API, a PostgreSQL table, SQL analysis, a TF-IDF classifier for occupation field and a Streamlit interface. I built each part myself."
 problem: "Job advertisements are published as free text across many employers and regions. This project collects Swedish job ads through the JobTech JobSearch API, stores them in PostgreSQL and explores them with SQL, a simple occupation classifier and an interactive interface."
 method:
   - title: "Ingest"

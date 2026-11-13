@@ -24,7 +24,15 @@ environment:
   - "Google Tag Manager"
 problem: "Eventive's measurement infrastructure needed repair, and customer acquisition needed to connect to sales operations."
 contributionTitle: "Technical delivery"
-contribution: "I managed technical project delivery across HubSpot lifecycle stages, lead qualification and routing, Slack notifications and Intercom, HubSpot and Zapier integrations. The programme also addressed duplicate CRM records and introduced clearer data-hygiene practices. Tracking work covered GA4, Google Tag Manager, conversion events, campaign attribution and behavioural analytics. My role focused on translating requirements, coordinating implementation dependencies and reviews, and aligning technical delivery with marketing-to-sales handovers."
+contribution: "I managed technical project delivery across CRM integration and measurement repair."
+pointsTitle: "What the programme covered"
+points:
+  - title: "CRM integration"
+    text: "HubSpot lifecycle stages, lead qualification and routing, Slack notifications, and Intercom, HubSpot and Zapier integrations. The programme also addressed duplicate CRM records and introduced clearer data-hygiene practices."
+  - title: "Measurement repair"
+    text: "Tracking work covered GA4, Google Tag Manager, conversion events, campaign attribution and behavioural analytics."
+  - title: "Delivery coordination"
+    text: "My role focused on translating requirements, coordinating implementation dependencies and reviews, and aligning technical delivery with marketing-to-sales handovers."
 team: "Developers, analysts and marketing and sales stakeholders."
 evidence:
   label: "eventive.org"

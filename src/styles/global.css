@@ -329,6 +329,12 @@ main { display: block; padding-bottom: 3rem; }
 .thumb .plate { width: 112px; flex: none; padding: 0.4rem; border-radius: 12px; }
 
 /* Browse tile */
+.sub-h { font-size: 0.8125rem; font: 700 0.75rem var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 1.25rem; }
+.points { display: grid; margin-top: 0.75rem; }
+.points li { display: grid; grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr); gap: 0.25rem 1.25rem; padding: 0.8rem 0; border-top: 1px solid var(--line); }
+.points li:last-child { border-bottom: 1px solid var(--line); }
+.points b { font-weight: 800; letter-spacing: -0.01em; }
+@media (max-width: 640px) { .points li { grid-template-columns: 1fr; } }
 .skill-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; margin-top: 1.25rem; }
 .skill-list h3 { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.015em; margin: 0.45rem 0 0.2rem; }
 @media (max-width: 760px) { .skill-list { grid-template-columns: 1fr; } }

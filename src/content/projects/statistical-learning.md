@@ -21,10 +21,13 @@ links:
   - label: "Repository"
     url: "https://github.com/iamalif/statistical-learning-msc"
 problem: "How well do different modelling approaches predict and classify wine quality from physicochemical measurements, and what structure appears without labels?"
+methodTitle: "Assignments and methods"
 method:
   - title: "Assignment 1"
+    url: "https://github.com/iamalif/statistical-learning-msc/tree/main/assignment-1"
     text: "Linear and nonlinear regression, logistic regression, LDA, QDA and K-nearest neighbours."
   - title: "Assignment 2"
+    url: "https://github.com/iamalif/statistical-learning-msc/tree/main/assignment-2"
     text: "Decision trees, Random Forests, gradient boosting, SVMs, PCA and clustering."
 limitsTitle: "Interpretation limits"
 limits:

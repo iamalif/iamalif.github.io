@@ -19,7 +19,15 @@ environment:
   - "HubSpot"
 problem: "Centella, a medical-imaging services business, needed a way to explain equipment downtime and service value to prospects, connected to its CRM and measurement."
 contributionTitle: "Technical delivery"
-contribution: "I managed technical delivery of custom sales tools and website improvements. The central deliverable was a downtime-cost calculator with reimbursement-rate calculations, service-level savings comparisons, HubSpot lead capture and calculator-usage tracking. I coordinated requirements and delivery across development, design, analytics and marketing, alongside reusable page templates and improvements to enquiry journeys."
+contribution: "I managed technical delivery of custom sales tools and website improvements, coordinating requirements and delivery across development, design, analytics and marketing."
+pointsTitle: "What was delivered"
+points:
+  - title: "Downtime-cost calculator"
+    text: "The central deliverable: reimbursement-rate calculations and service-level savings comparisons."
+  - title: "CRM connection"
+    text: "HubSpot lead capture and calculator-usage tracking."
+  - title: "Site improvements"
+    text: "Reusable page templates and improvements to enquiry journeys."
 team: "Developers, designers, analysts and marketers."
 evidence:
   label: "centellahealthtech.com"

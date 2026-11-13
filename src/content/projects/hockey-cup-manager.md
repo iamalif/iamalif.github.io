@@ -19,6 +19,7 @@ links:
   - label: "Repository"
     url: "https://github.com/iamalif/hockey-cup-manager-python"
 problem: "A practical registration and fee-tracking workflow, built to show object-oriented design, separation of responsibilities and JSON persistence in a small application."
+methodTitle: "Application features"
 method:
   - title: "Teams"
     text: "Register, view, update, delete, search and filter teams."
@@ -28,6 +29,15 @@ method:
     text: "Mark participation fees as paid or unpaid; view totals and payment statistics."
   - title: "Persistence"
     text: "Save teams, cup details and the next team ID to a local JSON file."
+example:
+  title: "Example workflow"
+  note: "From the repository README. The bundled cup details and team records are example data, not a current event."
+  steps:
+    - "Choose Add new team to enter a team name, type and fee-payment status."
+    - "Choose View team by ID or Search teams to find a registration."
+    - "Use Update team to edit its details or change its payment status."
+    - "Use Cancel / Reinstate team to change registration status while retaining the record."
+    - "Open Show statistics to review participation and fee-payment figures."
 limitsTitle: "Scope and limits"
 limits:
   - "The application manages registration and payment-status records. It does not process payments, schedule matches or calculate results."
