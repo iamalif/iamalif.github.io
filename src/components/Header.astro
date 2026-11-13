@@ -1,9 +1,10 @@
 ---
-import { site, nav } from '../data/site';
+import { site, nav, menus } from '../data/site';
 import { u } from '../lib/url';
 import ThemeToggle from './ThemeToggle.astro';
 interface Props { current?: string }
 const { current } = Astro.props;
+const idOf = (label: string) => `mega-${label.toLowerCase()}`;
 ---
 <header class="site-header">
   <div class="wrap">
@@ -12,7 +13,41 @@ const { current } = Astro.props;
       <span>{site.name}</span>
     </a>
     <nav class="nav-desktop" aria-label="Primary">
-      {nav.map((n) => <a href={u(n.path)} aria-current={current === n.label ? 'page' : undefined}>{n.label}</a>)}
+      <ul>
+        {nav.map((n) => {
+          const m = menus[n.label];
+          return (
+            <li class={m ? 'has-menu' : undefined}>
+              <a href={u(n.path)} aria-current={current === n.label ? 'page' : undefined}>{n.label}</a>
+              {m && (
+                <>
+                  {/* Expansion control: separate from the link, shown only when JavaScript runs. */}
+                  <button type="button" class="menu-toggle" aria-expanded="false" aria-controls={idOf(n.label)} hidden>
+                    <span class="visually-hidden">{n.label} menu</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4.2 6 8l4-3.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  </button>
+                  <div class="mega" id={idOf(n.label)} role="group" aria-label={`${n.label} menu`} hidden>
+                    <div class="mega__cols">
+                      <ul class="mega__areas">
+                        {m.areas.map((a) => (
+                          <li><a href={u(a.path)}><strong>{a.label}</strong><span>{a.text}</span></a></li>
+                        ))}
+                      </ul>
+                      <div class="mega__featured">
+                        <p class="label">Featured</p>
+                        <ul>
+                          {m.featured.map((f) => <li><a href={u(f.path)}>{f.label}</a></li>)}
+                        </ul>
+                      </div>
+                    </div>
+                    <a class="mega__all" href={u(m.all.path)}>{m.all.label} <span aria-hidden="true">&rarr;</span></a>
+                  </div>
+                </>
+              )}
+            </li>
+          );
+        })}
+      </ul>
     </nav>
     <div class="header-actions">
       <ThemeToggle />
@@ -22,7 +57,24 @@ const { current } = Astro.props;
         <div class="menu-panel">
           <nav aria-label="Primary mobile">
             <ul>
-              {nav.map((n) => <li><a href={u(n.path)} aria-current={current === n.label ? 'page' : undefined}>{n.label}</a></li>)}
+              {nav.map((n) => {
+                const m = menus[n.label];
+                return (
+                  <li>
+                    <a href={u(n.path)} aria-current={current === n.label ? 'page' : undefined}>{n.label}</a>
+                    {m && (
+                      <details class="m-sub">
+                        <summary>Browse {n.label}</summary>
+                        <ul>
+                          {m.areas.map((a) => <li><a href={u(a.path)}>{a.label}</a></li>)}
+                          {m.featured.map((f) => <li><a href={u(f.path)}>{f.label}</a></li>)}
+                          <li><a href={u(m.all.path)}>{m.all.label}</a></li>
+                        </ul>
+                      </details>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
           <a class="btn btn--primary" href={u('contact/')}>Contact</a>
@@ -31,4 +83,40 @@ const { current } = Astro.props;
       </details>
     </div>
   </div>
+  <script is:inline>
+    // Desktop expanded menus: enhancement only. Click or keyboard opens a panel from its own button; Escape,
+    // choosing a link, clicking elsewhere or moving focus away closes it. Without JavaScript the buttons stay
+    // hidden and every destination is reachable from the Work and Projects pages.
+    (function () {
+      var items = document.querySelectorAll('.has-menu');
+      if (!items.length) return;
+      function close(item, refocus) {
+        var b = item.querySelector('.menu-toggle');
+        var p = item.querySelector('.mega');
+        if (!b || !p || p.hidden) return;
+        p.hidden = true;
+        b.setAttribute('aria-expanded', 'false');
+        if (refocus) b.focus();
+      }
+      items.forEach(function (item) {
+        var b = item.querySelector('.menu-toggle');
+        var p = item.querySelector('.mega');
+        if (!b || !p) return;
+        b.hidden = false;
+        b.addEventListener('click', function () {
+          var wasOpen = b.getAttribute('aria-expanded') === 'true';
+          items.forEach(function (o) { if (o !== item) close(o, false); });
+          if (wasOpen) { close(item, false); return; }
+          p.hidden = false;
+          b.setAttribute('aria-expanded', 'true');
+        });
+        item.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(item, true); });
+        p.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) close(item, false); });
+        item.addEventListener('focusout', function (e) { if (e.relatedTarget && !item.contains(e.relatedTarget)) close(item, false); });
+      });
+      document.addEventListener('click', function (e) {
+        items.forEach(function (i) { if (!i.contains(e.target)) close(i, false); });
+      });
+    })();
+  </script>
 </header>

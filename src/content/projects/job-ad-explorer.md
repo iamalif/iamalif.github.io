@@ -6,7 +6,7 @@ role: "Built independently"
 context: "Independent project"
 dates: "Jun to Aug 2026"
 group: "Featured technical work"
-order: 3
+order: 1
 featured: true
 tags:
   - "Python"

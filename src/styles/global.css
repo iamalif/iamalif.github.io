@@ -176,10 +176,40 @@ a.chip:hover { border-color: var(--link); }
   width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center;
   background: linear-gradient(135deg, var(--a1), var(--a2)); color: var(--on-grad); font-weight: 800; font-size: 0.8125rem;
 }
-.nav-desktop { display: flex; gap: 1.75rem; margin-left: auto; margin-right: 1.5rem; }
-.nav-desktop a { color: var(--muted); text-decoration: none; font-weight: 500; min-height: 48px; display: inline-flex; align-items: center; border-bottom: 3px solid transparent; }
-.nav-desktop a:hover { color: var(--ink); }
-.nav-desktop a[aria-current='page'] { color: var(--ink); font-weight: 700; border-bottom-color: var(--a2); }
+.nav-desktop { display: flex; margin-left: auto; margin-right: 1.25rem; }
+.nav-desktop > ul { display: flex; align-items: center; gap: 1.4rem; }
+.nav-desktop > ul > li { display: flex; align-items: center; }
+.nav-desktop > ul > li > a { color: var(--muted); text-decoration: none; font-weight: 500; min-height: 48px; display: inline-flex; align-items: center; border-bottom: 3px solid transparent; }
+.nav-desktop > ul > li > a:hover { color: var(--ink); }
+.nav-desktop > ul > li > a[aria-current='page'] { color: var(--ink); font-weight: 700; border-bottom-color: var(--a2); }
+/* Expansion buttons and panels (Work, Projects) */
+.menu-toggle { display: inline-grid; place-items: center; width: 32px; min-height: 44px; margin-left: 0.1rem; border: 0; background: transparent; color: var(--muted); cursor: pointer; border-radius: 8px; }
+.menu-toggle[hidden] { display: none; }
+.menu-toggle:hover { color: var(--ink); }
+.menu-toggle svg { transition: transform 0.15s ease; }
+.menu-toggle[aria-expanded='true'] { color: var(--ink); }
+.menu-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
+.mega { position: fixed; top: 66px; left: 50%; transform: translateX(-50%); z-index: 30; width: min(38rem, calc(100vw - 2rem)); max-height: calc(100vh - 90px); max-height: calc(100dvh - 90px); overflow-y: auto; padding: 1.25rem; background: var(--bg); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
+.mega[hidden] { display: none; }
+.mega__cols { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.5rem; }
+.mega__areas { display: grid; gap: 0.25rem; }
+.mega__areas a { display: block; padding: 0.6rem 0.75rem; border-radius: 12px; text-decoration: none; color: var(--ink); min-height: 44px; }
+.mega__areas a:hover { background: var(--tile); }
+.mega__areas strong { display: block; font-weight: 700; }
+.mega__areas span { display: block; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+.mega__featured ul { display: grid; margin-top: 0.4rem; }
+.mega__featured a { display: flex; align-items: center; min-height: 44px; padding: 0 0.5rem; border-radius: 10px; color: var(--ink); text-decoration: none; font-weight: 600; }
+.mega__featured a:hover { background: var(--tile); }
+.brand span:last-child { white-space: nowrap; }
+/* Narrow desktop and tablet: keep the brand on one line and the header on one row. */
+@media (min-width: 901px) and (max-width: 1080px) {
+  .nav-desktop { margin-right: 0.5rem; }
+  .nav-desktop > ul { gap: 0.8rem; }
+  .header-actions { gap: 0.5rem; }
+  .theme button { padding: 0 0.45rem; min-width: 40px; }
+  .brand { gap: 0.55rem; }
+}
+.mega__all { display: flex; align-items: center; gap: 0.4rem; min-height: 44px; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--line); font-weight: 700; }
 .header-actions { display: flex; align-items: center; gap: 0.75rem; }
 .theme { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--tile); border: 1px solid var(--line); }
 .theme[hidden] { display: none; }
@@ -191,7 +221,7 @@ a.chip:hover { border-color: var(--link); }
 
 /* Mobile menu (details/summary, works without JavaScript) */
 .menu-mobile { display: none; }
-.menu-mobile summary {
+.menu-mobile > summary {
   list-style: none; cursor: pointer; min-height: 44px; min-width: 88px; padding: 0 1.1rem; display: inline-flex; align-items: center; justify-content: center;
   border: 1.5px solid var(--line); border-radius: 12px; background: var(--tile); font-weight: 700;
 }
@@ -199,7 +229,7 @@ a.chip:hover { border-color: var(--link); }
 .menu-mobile .close { display: none; }
 .menu-mobile[open] .open { display: none; }
 .menu-mobile[open] .close { display: inline; }
-.menu-mobile[open] summary { border-color: var(--link); }
+.menu-mobile[open] > summary { border-color: var(--link); }
 .menu-panel {
   position: absolute; left: 0; right: 0; top: 100%; background: var(--bg); border-bottom: 1px solid var(--line);
   max-height: calc(100vh - 65px); max-height: calc(100dvh - 65px); overflow-y: auto; overscroll-behavior: contain; padding: 0.75rem clamp(16px, 4.2vw, 60px) 1.25rem;
@@ -208,6 +238,13 @@ a.chip:hover { border-color: var(--link); }
 .menu-panel li a { display: flex; align-items: center; justify-content: space-between; min-height: 64px; font-size: clamp(1.6rem, 7vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
 .menu-panel li a[aria-current='page'] { color: var(--link); }
 .menu-panel .btn { width: 100%; margin-top: 1rem; }
+/* Mobile expandable groups for Work and Projects (native details, works without JavaScript) */
+.m-sub { border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; }
+.m-sub > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 0.5rem; padding-left: 0.75rem; color: var(--muted); font-weight: 600; font-size: 1rem; list-style: none; }
+.m-sub > summary::before { content: '+'; font-weight: 800; width: 1rem; text-align: center; }
+.m-sub[open] > summary::before { content: '\2212'; }
+.m-sub ul { display: grid; padding-bottom: 0.25rem; }
+.menu-panel .m-sub a { min-height: 48px; font-size: 1.05rem; font-weight: 600; letter-spacing: 0; border-bottom: 0; padding-left: 0.75rem; }
 .menu-panel .theme-row { margin-top: 1rem; display: flex; align-items: center; gap: 0.75rem; }
 
 /* Sections */
@@ -292,6 +329,13 @@ main { display: block; padding-bottom: 3rem; }
 .thumb .plate { width: 112px; flex: none; padding: 0.4rem; border-radius: 12px; }
 
 /* Browse tile */
+.skills-intro { max-width: 46rem; margin-bottom: 1.25rem; }
+.cap-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.cap { display: flex; flex-direction: column; gap: 0.7rem; padding: clamp(1.25rem, 2.2vw, 1.75rem); }
+.cap h3 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
+.cap .chip-links { margin-top: auto; padding-top: 0.4rem; }
+@media (max-width: 760px) { .cap-grid { grid-template-columns: 1fr; } }
+.menu-panel li:has(.m-sub) > a { border-bottom: 0; }
 .browse { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: end; }
 .browse h2 { font-size: clamp(1.8rem, 3.6vw, 3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.06; }
 .browse .actions { margin-top: 0; justify-content: flex-end; }

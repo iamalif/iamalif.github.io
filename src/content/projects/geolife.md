@@ -6,7 +6,7 @@ role: Implemented and analysed
 context: Coursework, group assignment (Group 26)
 dates: Mar to Apr 2026
 group: Featured technical work
-order: 1
+order: 3
 featured: true
 tags: [Python, scikit-learn, HMM, Feature engineering]
 diagramKind: bars

@@ -27,7 +27,7 @@ scope:
     label: "stock paths"
     note: "Simulation design"
 thumb: "../../assets/figures/montecarlo-hospital-capacity.png"
-thumbAlt: "Hospital capacity analysis figure from the project report."
+thumbAlt: "Hospital capacity analysis figure from the project repository."
 problem: "How uncertain are the outputs of a simulation, and how much does the answer depend on the model behind it? The project applies Monte Carlo simulation to a hospital-capacity problem and to stock-return outcomes, and separates simulation precision from uncertainty about the model and the future."
 method:
   - title: "Hospital model"
