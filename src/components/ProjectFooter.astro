@@ -1,0 +1,18 @@
+---
+// Shared closing block for work and project pages: a short invitation to get in touch, and a way back to the full list.
+// The "next" link stays as a secondary option in the page templates.
+import { site } from '../data/site';
+import { u } from '../lib/url';
+interface Props { backHref: string; backLabel: string }
+const { backHref, backLabel } = Astro.props;
+---
+<section class="tile tile--grad section-tile closing" aria-labelledby="closing-h">
+  <span class="label label--warm">// Get in touch</span>
+  <h2 id="closing-h">Questions about this work?</h2>
+  <p class="muted">Ask about the scope, my role or the limits, or about a role you are hiring for.</p>
+  <div class="actions">
+    <a class="btn btn--primary" href={u('contact/')}>Contact me</a>
+    <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email</a>
+    <a class="arrow-link back-link" href={backHref}>{backLabel}</a>
+  </div>
+</section>

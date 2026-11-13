@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { u } from '../lib/url';
+import ProjectFooter from './ProjectFooter.astro';
 interface Props { entry: CollectionEntry<'work'>; next?: CollectionEntry<'work'> }
 const { entry, next } = Astro.props;
 const d = entry.data;
@@ -10,7 +11,7 @@ const sections = [
   d.contribution && { id: 'contribution', label: 'My contribution' },
   d.decisions.length > 0 && { id: 'decisions', label: 'Decisions' },
   d.scope.length > 0 && { id: 'scope', label: 'Scope' },
-  d.evidence && { id: 'evidence', label: 'Evidence' },
+  d.evidence && { id: 'links', label: 'Project links' },
 ].filter(Boolean) as { id: string; label: string }[];
 ---
 <div class="wrap">
@@ -30,9 +31,10 @@ const sections = [
     <aside class="tile tile--grad facts project-facts" aria-label="Project facts">
       <span class="label">At a glance</span>
       <dl>
-        <div><dt>Role</dt><dd>{d.roleTitle ?? d.role}</dd></div>
-        <div><dt>Context</dt><dd>{d.org ? `${d.context}, ${d.org}` : d.context}</dd></div>
-        {d.dates && <div><dt>Dates</dt><dd>{d.dates}</dd></div>}
+        {/* Rows marked "dup" repeat the chips above the page. They are hidden when the page is one column (phones and tablets). */}
+        <div class:list={[(!d.roleTitle || d.roleTitle === d.role) && 'dup']}><dt>Role</dt><dd>{d.roleTitle ?? d.role}</dd></div>
+        <div class:list={[!d.org && 'dup']}><dt>Context</dt><dd>{d.org ? `${d.context}, ${d.org}` : d.context}</dd></div>
+        {d.dates && <div class="dup"><dt>Dates</dt><dd>{d.dates}</dd></div>}
         {d.environment.length > 0 && (
           <div><dt>Delivery environment</dt><dd><ul class="tags" style="margin-top:0.4rem">{d.environment.map((t) => <li>{t}</li>)}</ul></dd></div>
         )}
@@ -120,13 +122,15 @@ const sections = [
       )}
 
       {d.evidence && (
-        <section class="tile section-tile evidence" id="evidence" aria-labelledby="evidence-h">
-          <span class="label">Evidence you can inspect</span>
-          <h2 id="evidence-h" class="visually-hidden">Evidence</h2>
+        <section class="tile section-tile evidence" id="links" aria-labelledby="links-h">
+          <span class="label">Project links</span>
+          <h2 id="links-h" class="visually-hidden">Project links</h2>
           <p><a class="big" href={d.evidence.url}>{d.evidence.label}</a></p>
           <p class="muted">{d.evidence.note}</p>
         </section>
       )}
+
+      <ProjectFooter backHref={u('work/')} backLabel="Back to all work" />
 
       {next && (
         <a class="tile next-link" href={u(`work/${next.id}/`)}>
