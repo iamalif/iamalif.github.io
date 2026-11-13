@@ -1,7 +1,7 @@
 ---
 title: "Python, SQL and machine learning exercises"
 summary: "HackerRank and Kaggle practice across pandas, visualisation, feature engineering and model validation."
-role: "Coursework"
+role: "Practice"
 context: "Practice"
 dates: "2026"
 group: "Software and Python"

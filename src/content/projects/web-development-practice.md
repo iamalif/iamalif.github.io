@@ -1,7 +1,7 @@
 ---
 title: "Web development practice"
 summary: "HTML, CSS, JavaScript, Tailwind CSS and DaisyUI exercises, including landing pages and interactive interface exercises."
-role: "Coursework"
+role: "Practice"
 context: "Practice"
 dates: "Earlier learning"
 group: "Software and Python"

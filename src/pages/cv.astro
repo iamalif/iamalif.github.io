@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
+import { site, skillGroups } from '../data/site';
 import { u, absolute } from '../lib/url';
 
 const pdfName = 'Al-Amin-Alif-CV.pdf';
@@ -27,13 +27,7 @@ const experience = [
     'Managed SEO client accounts and coordinated outreach, content and technical SEO delivery.',
   ] },
 ];
-const skills = [
-  { g: 'AI and automation', t: 'AI agents, generative AI, prompt engineering, AI output evaluation, workflow automation, n8n, Zapier, Make' },
-  { g: 'Data and machine learning', t: 'Python, R, SQL, PostgreSQL, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
-  { g: 'Analytics', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, Streamlit' },
-  { g: 'Delivery and leadership', t: 'Technical project management, Agile and Scrum, requirements and acceptance criteria, QA, stakeholder and risk management, mentoring' },
-  { g: 'Delivery environments', t: 'HubSpot, WordPress, Shopify, Zoho, Google Analytics 4, Google Tag Manager, Google Cloud Run, Supabase, Vercel' },
-];
+const skills = skillGroups;
 const projects = [
   ['Swedish Job-Ad Explorer', 'Independent. JobTech API, PostgreSQL, TF-IDF classifier and Streamlit interface; local application.'],
   ['Monte Carlo risk analysis', 'Coursework. Hospital-capacity and stock-return simulations in R, including an exact stationary check of the hospital model.'],

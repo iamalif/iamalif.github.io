@@ -11,7 +11,7 @@ const entries = await getCollection('work', (e) => !e.data.draft);
       <span class="label">Work</span>
       <h1>Delivery work</h1>
       <p class="sub">Selected professional work across AI products, platform integrations, web delivery and analytics. My contributions span technical leadership, project management and delivery coordination.</p>
-      <p class="muted" style="margin-top:0.75rem">{entries.length} projects. The larger ones have their own pages; the rest link to the live client site.</p>
+      <p class="muted" style="margin-top:0.75rem">{entries.length} projects. Explore selected project write-ups and further client work.</p>
     </div>
     <IndexList entries={entries} kind="work" />
   </div>

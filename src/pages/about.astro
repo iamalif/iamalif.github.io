@@ -2,8 +2,12 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import portrait from '../assets/portrait.webp';
-import { site, education } from '../data/site';
+import { site, education, skillGroups } from '../data/site';
 import { u, absolute } from '../lib/url';
+
+// About shows the same groups as the CV, with leadership first.
+const aboutOrder = ['Delivery and leadership', 'AI and automation', 'Data and machine learning', 'Analytics', 'Delivery environments'];
+const skills = aboutOrder.map((g) => skillGroups.find((s) => s.g === g)!);
 
 const approach = [
   { tag: 'Requirements', text: 'Clear acceptance criteria and priorities before work starts.' },
@@ -92,9 +96,25 @@ const jsonLd = {
       </section>
     </div>
 
+    <section class="tile" style="margin-top:20px" aria-labelledby="skills-h">
+      <span class="label">Capabilities</span>
+      <h2 id="skills-h" class="visually-hidden">Capabilities</h2>
+      <p class="muted" style="max-width:46rem;margin-top:0.5rem">Delivery marks environments I led or coordinated. Hands-on marks work I implemented myself in independent and academic projects. <a href={u('#skills')}>See where each is used</a>.</p>
+      <ul class="skill-list">
+        {skills.map((s) => (
+          <li>
+            <span class="chip chip--role">{s.kind}</span>
+            <h3>{s.g}</h3>
+            <p>{s.t}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
     <section class="tile" style="margin-top:20px" aria-labelledby="cred-h">
       <span class="label">Credentials and training</span>
       <h2 id="cred-h" class="visually-hidden">Credentials and training</h2>
+      <p class="muted" style="max-width:46rem;margin-top:0.5rem">Training that supports the experience above. It does not replace it.</p>
       <div class="cred-grid">
         {credentials.map((c) => (
           <div>

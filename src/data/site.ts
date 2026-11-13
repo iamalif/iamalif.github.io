@@ -118,4 +118,13 @@ export const education = [
   { org: 'BRAC University', role: 'BSc Computer Science and Engineering', dates: '2014 to 2019' },
 ];
 
+// Skill groups shared by the CV and the About page. `kind` separates delivery environments from hands-on work.
+export const skillGroups: { g: string; t: string; kind: 'Delivery' | 'Hands-on' }[] = [
+  { g: 'AI and automation', kind: 'Delivery', t: 'AI agents, generative AI, prompt engineering, AI output evaluation, workflow automation, n8n, Zapier, Make' },
+  { g: 'Data and machine learning', kind: 'Hands-on', t: 'Python, R, SQL, PostgreSQL, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
+  { g: 'Analytics', kind: 'Hands-on', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, Streamlit' },
+  { g: 'Delivery and leadership', kind: 'Delivery', t: 'Technical project management, Agile and Scrum, requirements and acceptance criteria, QA, stakeholder and risk management, mentoring' },
+  { g: 'Delivery environments', kind: 'Delivery', t: 'HubSpot, WordPress, Shopify, Zoho, Google Analytics 4, Google Tag Manager, Google Cloud Run, Supabase, Vercel' },
+];
+
 export const focus = ['AI agents', 'Automation', 'Python', 'SQL', 'Data analysis', 'Machine learning', 'Technical delivery'];
