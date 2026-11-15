@@ -117,8 +117,8 @@ export const education = [
 // Skill groups shared by the CV and the About page.
 export const skillGroups: { g: string; t: string }[] = [
   { g: 'AI and automation', t: 'AI agents, generative AI, prompt engineering, AI output evaluation, workflow automation, n8n, Zapier, Make' },
-  { g: 'Data and machine learning', t: 'Python, R, SQL, PostgreSQL, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
-  { g: 'Analytics', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, Streamlit' },
+  { g: 'Data and machine learning', t: 'Python, R, SQL, PostgreSQL, SQLite, pandas, NumPy, scikit-learn, feature engineering, model evaluation, text mining, Monte Carlo simulation' },
+  { g: 'Analytics', t: 'Power BI, DAX, data modelling, dashboards, data quality, REST APIs, FastAPI, Streamlit' },
   { g: 'Delivery and leadership', t: 'Technical project management, Agile and Scrum, requirements and acceptance criteria, QA, stakeholder and risk management, mentoring' },
   { g: 'Delivery environments', t: 'HubSpot, WordPress, Shopify, Zoho, Google Analytics 4, Google Tag Manager, Google Cloud Run, Supabase, Vercel' },
 ];

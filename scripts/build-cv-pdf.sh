@@ -19,7 +19,21 @@ trap 'kill "$SERVER" 2>/dev/null || true; lsof -nP -iTCP:"$PORT" -sTCP:LISTEN -t
 PUBLIC_SITE="$SITE" PUBLIC_BASE="$BASE" npx astro dev --port "$PORT" >/dev/null 2>&1 &
 SERVER=$!
 for _ in $(seq 1 40); do curl -sf "http://127.0.0.1:$PORT${BASE}cv/" >/dev/null && break; sleep 0.5; done
-"$CHROME" --headless --disable-gpu --user-data-dir="$PROFILE" --no-pdf-header-footer \
-  --print-to-pdf=public/Al-Amin-Alif-CV.pdf "http://127.0.0.1:$PORT${BASE}cv/" >/dev/null 2>&1
+# Print to a temporary file and retry: Chrome sometimes exits without writing anything. The existing PDF is only
+# replaced by a fresh, non-empty one, so a failed run can never leave an old PDF looking like a new one.
+TMP_PDF="$PROFILE/cv.pdf"
+for attempt in 1 2 3; do
+  rm -f "$TMP_PDF"
+  "$CHROME" --headless --disable-gpu --user-data-dir="$PROFILE" --no-pdf-header-footer \
+    --print-to-pdf="$TMP_PDF" "http://127.0.0.1:$PORT${BASE}cv/" >"$PROFILE/chrome.log" 2>&1 || true
+  [ -s "$TMP_PDF" ] && break
+  sleep 2
+done
+if [ ! -s "$TMP_PDF" ]; then
+  echo "Chrome did not produce a PDF after 3 attempts. The existing PDF was NOT changed. Chrome said:" >&2
+  tail -20 "$PROFILE/chrome.log" >&2
+  exit 1
+fi
+mv "$TMP_PDF" public/Al-Amin-Alif-CV.pdf
 printf '%s\n' "$SITE$BASE" > scripts/cv-pdf-built-for.txt
-echo "Wrote public/Al-Amin-Alif-CV.pdf for $SITE$BASE"
+echo "Wrote public/Al-Amin-Alif-CV.pdf for $SITE$BASE ($(wc -c < public/Al-Amin-Alif-CV.pdf | tr -d ' ') bytes)"

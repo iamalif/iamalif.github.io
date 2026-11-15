@@ -54,8 +54,7 @@ const sections = [
 
       {d.problem && (
         <section class="tile section-tile" id="context" aria-labelledby="context-h">
-          <span class="label">Problem and context</span>
-          <h2 id="context-h" class="visually-hidden">Problem and context</h2>
+          <span class="label" id="context-h" role="heading" aria-level="2">Problem and context</span>
           <p style="font-size:1.125rem">{d.problem}</p>
         </section>
       )}
@@ -123,8 +122,7 @@ const sections = [
 
       {d.evidence && (
         <section class="tile section-tile evidence" id="links" aria-labelledby="links-h">
-          <span class="label">Project links</span>
-          <h2 id="links-h" class="visually-hidden">Project links</h2>
+          <span class="label" id="links-h" role="heading" aria-level="2">Project links</span>
           <p><a class="big" href={d.evidence.url}>{d.evidence.label}</a></p>
           <p class="muted">{d.evidence.note}</p>
         </section>

@@ -27,7 +27,7 @@ links:
     url: "https://github.com/iamalif/swedish-job-search-assistant"
   - label: "Architecture notes"
     url: "https://github.com/iamalif/swedish-job-search-assistant/blob/main/docs/ARCHITECTURE.md"
-problem: "A tool for reviewing Swedish job advertisements faster, with every judgement traceable. It finds current ads, explains how each one relates to the user's own verified evidence, and helps prepare an application. It is a decision aid. It does not predict whether someone would be hired."
+problem: "A tool for reviewing Swedish job advertisements faster, with every judgement traceable. It finds current ads, explains how each one relates to the user's supplied profile evidence, and helps prepare an application. It is a decision aid. It does not predict whether someone would be hired."
 methodTitle: "Implemented features"
 method:
   - title: "API ingestion"
