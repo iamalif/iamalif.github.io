@@ -7,7 +7,7 @@ context: "Independent project"
 dates: "Jun to Aug 2026"
 group: "Featured technical work"
 order: 1
-featured: true
+featured: false
 tags:
   - "Python"
   - "PostgreSQL"
@@ -47,5 +47,8 @@ limits:
   - "Employer-name normalisation merges casing differences but is not full entity resolution."
   - "Model quality has not been validated beyond the baseline comparison, and no accuracy figure is claimed."
   - "The monthly chart covers all stored regions and is not filtered by the region selector."
+related:
+  - label: "Swedish Job Search Assistant"
+    path: "projects/swedish-job-search-assistant/"
 contribution: "An independent project, not a university assignment. I built the ingestion, database schema, SQL analysis, classifier and interface myself."
 ---

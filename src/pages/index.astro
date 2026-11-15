@@ -109,7 +109,7 @@ const fig = feature?.data.findings?.figure;
           <article class="tile tile--grad tech-feature">
             <div class="stack">
               <p><span class="chip chip--role">{feature.data.role}</span></p>
-              <p class="meta">{[feature.data.context, feature.data.dates].filter(Boolean).join(' · ')}</p>
+              <p class="meta">{[feature.data.context, feature.data.dates, feature.data.status].filter(Boolean).join(' · ')}</p>
               <h3><a href={u(`projects/${feature.id}/`)}>{feature.data.title}</a></h3>
               <p>{feature.data.summary}</p>
               {feature.data.scope.length > 0 && <p class="scope">{feature.data.scope.map((s, i) => <>{i > 0 && ' · '}<b>{s.value}</b> {s.label}</>)} (dataset scope)</p>}
@@ -131,7 +131,7 @@ const fig = feature?.data.findings?.figure;
         {side.map((e) => (
           <article class="tile tech-side">
             <p><span class="chip chip--role">{e.data.role}</span></p>
-            <p class="meta">{[e.data.context, e.data.dates].filter(Boolean).join(' · ')}</p>
+            <p class="meta">{[e.data.context, e.data.dates, e.data.status].filter(Boolean).join(' · ')}</p>
             <h3><a href={u(`projects/${e.id}/`)}>{e.data.title}</a></h3>
             <p>{e.data.summary}</p>
             <div class="thumb">

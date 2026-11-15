@@ -46,7 +46,7 @@ export const menus: Record<string, { areas: { label: string; text: string; path:
       { label: 'Research and data quality', text: 'Environmental disclosure, data collection and quality, and the Calibration Gap proposal', path: 'projects/#g-featured-technical-work' },
     ],
     featured: [
-      { label: 'Job-Ad Explorer', path: 'projects/job-ad-explorer/' },
+      { label: 'Job Search Assistant', path: 'projects/swedish-job-search-assistant/' },
       { label: 'Monte Carlo', path: 'projects/monte-carlo/' },
       { label: 'GeoLife', path: 'projects/geolife/' },
     ],

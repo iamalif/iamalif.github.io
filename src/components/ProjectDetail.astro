@@ -29,6 +29,7 @@ const sections = [
       <span class="chip chip--solid">{d.role}</span>
       <span class="chip">{d.context}</span>
       {d.dates && <span class="chip">{d.dates}</span>}
+      {d.status && <span class="chip">{d.status}</span>}
     </div>
   </div>
 
@@ -40,6 +41,7 @@ const sections = [
         <div class="dup"><dt>Role</dt><dd>{d.role}</dd></div>
         <div class="dup"><dt>Context</dt><dd>{d.context}</dd></div>
         {d.dates && <div class="dup"><dt>Dates</dt><dd>{d.dates}</dd></div>}
+        {d.status && <div class="dup"><dt>Status</dt><dd>{d.status}</dd></div>}
         {d.data && <div><dt>Data</dt><dd>{d.data}</dd></div>}
         {d.tools.length > 0 && <div><dt>Tools</dt><dd><ul class="tags" style="margin-top:0.4rem">{d.tools.map((t) => <li>{t}</li>)}</ul></dd></div>}
       </dl>
